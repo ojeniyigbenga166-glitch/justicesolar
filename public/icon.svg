@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 150" width="400" height="150">
+  <!-- Sun -->
+  <circle cx="200" cy="45" r="25" fill="#f5c518" />
+  <path d="M200 10 v-10 M200 80 v10 M165 45 h-10 M235 45 h10 M175 20 l-7 -7 M225 70 l7 7 M175 70 l-7 7 M225 20 l7 -7" stroke="#f5c518" stroke-width="4" stroke-linecap="round"/>
+  
+  <!-- Solar Panels -->
+  <path d="M170 55 L195 55 L185 80 L155 80 Z" fill="#2ecc71" opacity="0.9"/>
+  <path d="M175 55 L195 55 L185 80 L165 80 Z" fill="none" stroke="#ffffff" stroke-width="2"/>
+  
+  <!-- House Roof -->
+  <path d="M205 55 L235 80 L220 80 L195 60 Z" fill="#e67e22"/>
+  <path d="M205 55 L240 85" stroke="#d35400" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Text -->
+  <text x="200" y="115" font-family="'Outfit', sans-serif" font-weight="900" font-size="32" fill="#f5c518" text-anchor="middle" letter-spacing="1">JUSTICE GEORGENES</text>
+  <text x="200" y="140" font-family="'Outfit', sans-serif" font-weight="700" font-size="18" fill="#ffffff" text-anchor="middle" letter-spacing="3" opacity="0.8">SOLAR CONSULTS</text>
+</svg>
