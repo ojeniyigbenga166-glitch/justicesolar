@@ -35,7 +35,7 @@ function createNavbar() {
     </a>
 
     <!-- Hamburger -->
-    <div class="navbar__hamburger" id="hamburger" aria-label="Open menu">
+    <div class="navbar__hamburger" id="hamburger" role="button" tabindex="0" aria-label="Open menu">
       <span></span><span></span><span></span>
     </div>
   `;
@@ -398,7 +398,7 @@ function createCalculator() {
       <!-- Middle: Inputs -->
       <div class="calc__mid">
         <div class="calc__input-group">
-          <label>Monthly Electricity Bill</label>
+          <label for="calc-bill">Monthly Electricity Bill</label>
           <div class="calc__input-wrapper">
             <span class="calc__currency">₦</span>
             <input type="number" id="calc-bill" value="50000" min="5000" step="5000" />
@@ -406,7 +406,7 @@ function createCalculator() {
         </div>
 
         <div class="calc__input-group">
-          <label>Average Sunlight Hours</label>
+          <label for="calc-sun">Average Sunlight Hours</label>
           <div class="calc__select-wrapper">
             <select id="calc-sun">
               <option value="4">4 Hours</option>
@@ -418,7 +418,7 @@ function createCalculator() {
         </div>
 
         <div class="calc__input-group">
-          <label>System Size (kVA)</label>
+          <label for="calc-size">System Size (kVA)</label>
           <div class="calc__select-wrapper">
             <select id="calc-size">
               <option value="3">3 kVA</option>
@@ -453,7 +453,7 @@ function createCalculator() {
         <div class="calc__chart">
           <div class="calc__chart-header">
             <p>Savings Over Time</p>
-            <select class="calc__chart-select">
+            <select class="calc__chart-select" aria-label="Savings Over Time">
               <option>25 Years</option>
             </select>
           </div>
@@ -815,7 +815,7 @@ function createMapSection() {
 
   section.innerHTML = `
     <div class="map-container">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3950.3648474644!2d5.186!3d7.264!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x10404b0d0d0d0d0d%3A0x0!2sAkure%20Ondo%20State%20Nigeria!5e0!3m2!1sen!2sng!4v1234567890" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <iframe title="Google Maps Location of Justice Georgenes" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3950.3648474644!2d5.186!3d7.264!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x10404b0d0d0d0d0d%3A0x0!2sAkure%20Ondo%20State%20Nigeria!5e0!3m2!1sen!2sng!4v1234567890" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
   `;
 

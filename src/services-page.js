@@ -36,7 +36,7 @@ function createNavbar() {
     </a>
 
     <!-- Hamburger -->
-    <div class="navbar__hamburger" id="hamburger" aria-label="Open menu">
+    <div class="navbar__hamburger" id="hamburger" role="button" tabindex="0" aria-label="Open menu">
       <span></span><span></span><span></span>
     </div>
   `;

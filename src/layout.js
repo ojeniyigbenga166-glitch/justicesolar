@@ -34,7 +34,7 @@ export function createNavbar(activePage = '') {
       <span class="navbar__cart-badge" id="cart-badge" style="display:none">0</span>
     </button>
 
-    <div class="navbar__hamburger" id="hamburger" aria-label="Open menu">
+    <div class="navbar__hamburger" id="hamburger" role="button" tabindex="0" aria-label="Open menu">
       <span></span><span></span><span></span>
     </div>
   `;
