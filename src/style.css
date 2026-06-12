@@ -871,7 +871,7 @@ img {
 .hero__bg {
   position: absolute;
   inset: 0;
-  background-image: url('/new%20hero.png');
+  background-image: url('https://res.cloudinary.com/drgpqcilp/image/upload/f_auto,q_auto/justiceasdfg_g8oswp');
   background-size: cover;
   background-position: center 30%;
   background-repeat: no-repeat;
