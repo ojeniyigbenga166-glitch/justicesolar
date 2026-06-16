@@ -1,5 +1,6 @@
 import './style.css';
 import { supabase } from './supabase.js';
+import { products, fetchProducts } from './products.js';
 
 // ==============================
 // NAVBAR Component
@@ -9,34 +10,77 @@ function createNavbar() {
   nav.className = 'navbar';
   nav.id = 'navbar';
   nav.innerHTML = `
-    <!-- Logo -->
-    <div class="navbar__logo" id="logo-home">
-      <img src="/icon.svg" alt="Justice Georgenes Solar Consults" class="navbar__logo-img" />
+    <!-- Top Tier: Logo + Contact Info -->
+    <div class="navbar-top desktop-only">
+      <div class="navbar-top__left">
+        <div class="navbar__logo" id="logo-home">
+          <img src="/icon.svg" alt="Justice Georgenes Solar Consults" class="navbar__logo-img" />
+        </div>
+      </div>
+      <div class="navbar-top__right">
+        <div class="contact-block">
+          <div class="contact-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></div>
+          <div class="contact-text"><span>Akure</span><small>Cash-hold Complex, Ondo Rd</small></div>
+        </div>
+        <div class="contact-block">
+          <div class="contact-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></div>
+          <div class="contact-text"><span>Call us anytime</span><small>08147574404</small></div>
+        </div>
+        <div class="contact-block">
+          <div class="contact-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></div>
+          <div class="contact-text"><span>Send us a mail</span><small>ojeniyigbenga166@gmail.com</small></div>
+        </div>
+      </div>
     </div>
 
-    <!-- Desktop Nav Links -->
-    <ul class="navbar__links">
-      <li><a href="#home" id="nav-home">Home</a></li>
-      <li><a href="#about" id="nav-about">About</a></li>
-
-      <li><a href="/services.html" id="nav-services">Services</a></li>
-      <li><a href="/projects.html" id="nav-projects">Projects</a></li>
-      <li><a href="/shop.html" id="nav-shop">Shop</a></li>
-      <li><a href="#contact" id="nav-contact">Contact</a></li>
-    </ul>
-
-    <!-- CTA -->
-    <button class="btn-cta desktop-only" id="nav-get-started">Get Started</button>
-
-    <!-- Cart Icon -->
-    <a href="/shop.html" class="navbar__cart" id="nav-cart" aria-label="Shopping cart">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-      <span class="navbar__cart-badge" id="cart-badge">0</span>
-    </a>
-
-    <!-- Hamburger -->
-    <div class="navbar__hamburger" id="hamburger" role="button" tabindex="0" aria-label="Open menu">
-      <span></span><span></span><span></span>
+    <!-- Bottom Tier: Nav Links -->
+    <div class="navbar-bottom">
+      <div class="navbar-bottom__left">
+        <!-- Hamburger -->
+        <div class="navbar__hamburger" id="hamburger" role="button" tabindex="0" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </div>
+        <!-- Mobile Logo -->
+        <div class="navbar__logo mobile-only" id="logo-home-mob">
+          <img src="/icon.svg" alt="Justice Georgenes Solar Consults" class="navbar__logo-img" style="height:40px;" />
+        </div>
+        <!-- Desktop Nav Links -->
+        <ul class="navbar__links">
+          <li><a href="#home" id="nav-home">Home</a></li>
+          <li class="company-menu">
+            <a href="javascript:void(0)" style="display:flex;align-items:center;gap:4px;">Company <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
+            <ul class="company-dropdown">
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#locations">Our Branches</a></li>
+              <li><a href="#how-it-works">Why Choose Us</a></li>
+              <li><a href="#testimonials">Testimonials</a></li>
+            </ul>
+          </li>
+          <li class="services-menu">
+            <a href="/services.html" id="nav-services" style="display:flex;align-items:center;gap:4px;">Services <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
+            <ul class="services-dropdown">
+              <li><a href="/services.html?service=product">Product</a></li>
+              <li><a href="/services.html?service=residential">Residential solar solution</a></li>
+              <li><a href="/services.html?service=industrial">Industrial solar solution</a></li>
+              <li><a href="/services.html?service=installment">installment plan</a></li>
+              <li><a href="/services.html?service=audits">Comprehensive Site Audits</a></li>
+              <li><a href="/services.html?service=installation">Professional Installation</a></li>
+              <li><a href="/services.html?service=maintenance">Maintenance &amp; Support</a></li>
+              <li><a href="/services.html?service=training">Solar Training Program</a></li>
+            </ul>
+          </li>
+          <li><a href="/projects.html" id="nav-projects">Projects</a></li>
+          <li><a href="/shop.html" id="nav-shop">Shop</a></li>
+          <li><a href="#contact" id="nav-contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="navbar-bottom__right">
+        <a href="/shop.html" class="navbar__cart" id="nav-cart" aria-label="Shopping cart">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+          <span class="navbar__cart-badge" id="cart-badge">0</span>
+        </a>
+        <button class="btn-cta-full desktop-only" id="nav-get-started">Get Started</button>
+      </div>
     </div>
   `;
   return nav;
@@ -49,9 +93,21 @@ function createMobileMenu() {
   menu.id = 'mobile-menu';
   menu.innerHTML = `
     <a href="#home" id="mob-home">Home</a>
-    <a href="#about" id="mob-about">About</a>
+    <div style="padding: 1rem 2rem; color: rgba(255, 255, 255, 0.5); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Company</div>
+    <a href="#about" style="padding: 0.5rem 3rem; font-size: 1rem;">About Us</a>
+    <a href="#locations" style="padding: 0.5rem 3rem; font-size: 1rem;">Our Branches</a>
+    <a href="#how-it-works" style="padding: 0.5rem 3rem; font-size: 1rem;">Why Choose Us</a>
+    <a href="#testimonials" style="padding: 0.5rem 3rem; font-size: 1rem;">Testimonials</a>
 
-    <a href="/services.html" id="mob-services">Services</a>
+    <div style="padding: 1rem 2rem; color: rgba(255, 255, 255, 0.5); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Services</div>
+    <a href="/services.html?service=product" style="padding: 0.5rem 3rem; font-size: 1rem;">Product</a>
+    <a href="/services.html?service=residential" style="padding: 0.5rem 3rem; font-size: 1rem;">Residential Solar Solution</a>
+    <a href="/services.html?service=industrial" style="padding: 0.5rem 3rem; font-size: 1rem;">Industrial Solar Solution</a>
+    <a href="/services.html?service=installment" style="padding: 0.5rem 3rem; font-size: 1rem;">installment plan</a>
+    <a href="/services.html?service=audits" style="padding: 0.5rem 3rem; font-size: 1rem;">Comprehensive Site Audits</a>
+    <a href="/services.html?service=installation" style="padding: 0.5rem 3rem; font-size: 1rem;">Professional Installation</a>
+    <a href="/services.html?service=maintenance" style="padding: 0.5rem 3rem; font-size: 1rem;">Maintenance &amp; Support</a>
+    <a href="/services.html?service=training" style="padding: 0.5rem 3rem; font-size: 1rem;">Solar Training Program</a>
     <a href="/projects.html" id="mob-projects">Projects</a>
     <a href="/shop.html" id="mob-shop">Shop</a>
     <a href="#contact" id="mob-contact">Contact</a>
@@ -248,7 +304,7 @@ function createHowItWorks() {
       
       <!-- Left side: Text -->
       <div class="hiw__content">
-        <p class="section-label" style="color: var(--color-accent);">HOW IT WORKS</p>
+        <p class="section-label" style="color: var(--color-primary);">HOW IT WORKS</p>
         <h2 class="hiw__title">Simple Steps to Solar Savings</h2>
         <p class="hiw__desc">We make going solar easy from start to finish.</p>
         <button class="btn-primary hiw__btn" id="hiw-get-started">Get Started</button>
@@ -327,50 +383,26 @@ function createProducts() {
         <div class="section-line"></div>
       </div>
 
-      <div class="products__grid">
-        <!-- Product 1: Solar Inverters -->
-        <div class="product-card">
-          <div class="product-image-wrap">
-            <img src="/product 1.png" alt="Solar Inverters" class="product-img" />
-          </div>
-          <div class="product-info">
-            <h3 class="product-title">Solar Inverters</h3>
-            <p class="product-desc">State-of-the-art inverters converting DC to AC power with maximum efficiency. Equipped with monitoring and smart features for optimal performance.</p>
+      <div class="products__carousel-wrapper">
+        <button class="carousel-btn prev-btn" id="carousel-prev" aria-label="Previous products">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <div class="products__carousel-track-container">
+          <div class="products__carousel-track" id="products-carousel-track">
+            <div style="width: 100%; text-align: center; padding: 2rem; color: var(--color-primary);">Loading Products...</div>
           </div>
         </div>
+        <button class="carousel-btn next-btn" id="carousel-next" aria-label="Next products">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
 
-        <!-- Product 2: Solar Batteries -->
-        <div class="product-card">
-          <div class="product-image-wrap">
-            <img src="/product 2.png" alt="Solar Batteries" class="product-img" />
-          </div>
-          <div class="product-info">
-            <h3 class="product-title">Solar Batteries</h3>
-            <p class="product-desc">Reliable energy storage solutions ensuring 24/7 power availability. Advanced lithium technology for safety, longevity, and performance.</p>
-          </div>
-        </div>
-
-        <!-- Product 3: Complete Setup -->
-        <div class="product-card">
-          <div class="product-image-wrap">
-            <img src="/product 3.png" alt="Complete Solar Setup" class="product-img" />
-          </div>
-          <div class="product-info">
-            <h3 class="product-title">Complete Setup</h3>
-            <p class="product-desc">End-to-end solar solutions combining panels, batteries, inverters, and mounting. Ready for installation with full technical support and warranty.</p>
-          </div>
-        </div>
-
-        <!-- Product 4: Solar Panels -->
-        <div class="product-card">
-          <div class="product-image-wrap">
-            <img src="/product 4.png" alt="Solar Panels" class="product-img" />
-          </div>
-          <div class="product-info">
-            <h3 class="product-title">Solar Panels</h3>
-            <p class="product-desc">High-efficiency photovoltaic panels designed for maximum energy conversion and durability. Perfect for residential and commercial installations.</p>
-          </div>
-        </div>
+      <!-- Browse All CTA Button -->
+      <div class="products__actions">
+        <a href="/shop.html" class="btn-primary">
+          Browse All Products
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 6px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
       </div>
     </div>
   `;
@@ -447,7 +479,7 @@ function createCalculator() {
             <p class="calc__roi-value">4 - 6 Years</p>
           </div>
 
-          <p class="calc__lifespan"><span style="color: #65c370; font-weight: 700;">25+ Years</span> System Lifespan</p>
+          <p class="calc__lifespan"><span style="color: var(--color-accent); font-weight: 700;">25+ Years</span> System Lifespan</p>
         </div>
 
         <div class="calc__chart">
@@ -810,14 +842,82 @@ function createFaq() {
 // ==============================
 function createMapSection() {
   const section = document.createElement('section');
-  section.className = 'map-section';
-  section.id = 'map';
+  section.className = 'locations-section';
+  section.id = 'locations';
+
+  const akureMap = "https://maps.google.com/maps?q=JUSTICE+GEORGENES+SOLAR+CONSULTS,+Akure,+Ondo+State&t=&z=16&ie=UTF8&iwloc=B&output=embed";
+  const ondoMap = "https://maps.google.com/maps?q=Yaba+Street,+Ondo+City,+Ondo+State,+Nigeria&t=&z=14&ie=UTF8&iwloc=&output=embed";
+  const ekitiMap = "https://maps.google.com/maps?q=Fajuyi+Road,+Ado+Ekiti,+Ekiti+State,+Nigeria&t=&z=14&ie=UTF8&iwloc=&output=embed";
 
   section.innerHTML = `
-    <div class="map-container">
-      <iframe title="Google Maps Location of Justice Georgenes" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3950.3648474644!2d5.186!3d7.264!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x10404b0d0d0d0d0d%3A0x0!2sAkure%20Ondo%20State%20Nigeria!5e0!3m2!1sen!2sng!4v1234567890" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <div class="locations__container">
+      <div class="section-header">
+        <p class="section-label">OUR LOCATIONS</p>
+        <h2 class="section-title">Visit Our Branches</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="locations__content">
+        <!-- Map Column -->
+        <div class="locations__map-wrapper">
+          <iframe id="branch-map-iframe" title="Google Maps Location of Justice Georgenes" src="${akureMap}" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+        <!-- Branches Column -->
+        <div class="locations__branches">
+          
+          <div class="branch-card active" data-src="${akureMap}">
+            <div class="branch-card__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            </div>
+            <div class="branch-card__info">
+              <h3 class="branch-card__title">Akure Branch (Head Office)</h3>
+              <p class="branch-card__text"><strong>Address:</strong> Suite 1, Cash-hold Complex, Ondo Rd, off Arakale Road, Akure 340106, Ondo</p>
+              <p class="branch-card__text"><strong>Support:</strong> 09023924127, 08145481214</p>
+            </div>
+          </div>
+
+          <div class="branch-card" data-src="${ondoMap}">
+            <div class="branch-card__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            </div>
+            <div class="branch-card__info">
+              <h3 class="branch-card__title">Ondo Town Branch</h3>
+              <p class="branch-card__text"><strong>Address:</strong> 45 Yaba Street, Ondo City, Ondo State</p>
+              <p class="branch-card__text"><strong>Support:</strong> +234 800 123 4568</p>
+            </div>
+          </div>
+
+          <div class="branch-card" data-src="${ekitiMap}">
+            <div class="branch-card__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            </div>
+            <div class="branch-card__info">
+              <h3 class="branch-card__title">Ado Ekiti Branch</h3>
+              <p class="branch-card__text"><strong>Address:</strong> 88 Fajuyi Road, Ado Ekiti, Ekiti State</p>
+              <p class="branch-card__text"><strong>Support:</strong> +234 800 123 4569</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
     </div>
   `;
+
+  // Add Interactivity
+  const iframe = section.querySelector('#branch-map-iframe');
+  const cards = section.querySelectorAll('.branch-card');
+
+  cards.forEach(card => {
+    card.addEventListener('click', () => {
+      // Remove active class from all
+      cards.forEach(c => c.classList.remove('active'));
+      // Add active class to clicked
+      card.classList.add('active');
+      // Update iframe map URL
+      iframe.src = card.getAttribute('data-src');
+    });
+  });
 
   return section;
 }
@@ -1400,7 +1500,119 @@ function init() {
     }
   }
   updateCartBadge();
+  initProductsCarousel();
+}
 
+async function initProductsCarousel() {
+  const track = document.getElementById('products-carousel-track');
+  const prevBtn = document.getElementById('carousel-prev');
+  const nextBtn = document.getElementById('carousel-next');
+  if (!track) return;
+
+  let allProducts = [];
+  try {
+    allProducts = await fetchProducts();
+  } catch (err) {
+    console.error('Error fetching products for carousel:', err);
+  }
+
+  // Slice first 10 products
+  const topProducts = allProducts.slice(0, 10);
+
+  track.innerHTML = topProducts.map(p => `
+    <div class="carousel-product-card" data-id="${p.id}">
+      <div class="carousel-product-image-wrap">
+        <img src="${p.image}" alt="${p.name}" class="carousel-product-img" loading="lazy" />
+        <span class="carousel-product-category">${p.category}</span>
+      </div>
+      <div class="carousel-product-info">
+        <span class="carousel-product-brand">${p.brand}</span>
+        <h3 class="carousel-product-title">${p.name}</h3>
+        <p class="carousel-product-desc">${p.shortDescription || ''}</p>
+        <div class="carousel-product-footer">
+          <span class="carousel-product-price">₦${p.price.toLocaleString()}</span>
+          <a href="/shop/product.html?id=${p.id}" class="carousel-product-link">
+            View Details
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  let currentIndex = 0;
+  let autoPlayTimer = null;
+
+  function getCardsPerView() {
+    const w = window.innerWidth;
+    if (w <= 480) return 1;
+    if (w <= 768) return 2;
+    if (w <= 1200) return 3;
+    return 4;
+  }
+
+  function updateSlide() {
+    const cardsPerView = getCardsPerView();
+    const maxIndex = Math.max(0, topProducts.length - cardsPerView);
+    
+    if (currentIndex > maxIndex) currentIndex = maxIndex;
+    if (currentIndex < 0) currentIndex = 0;
+
+    const cards = track.querySelectorAll('.carousel-product-card');
+    if (cards[currentIndex]) {
+      const offsetLeft = cards[currentIndex].offsetLeft;
+      track.style.transform = `translateX(-${offsetLeft}px)`;
+    }
+  }
+
+  function startAutoPlay() {
+    stopAutoPlay();
+    autoPlayTimer = setInterval(() => {
+      const cardsPerView = getCardsPerView();
+      const maxIndex = Math.max(0, topProducts.length - cardsPerView);
+      if (currentIndex >= maxIndex) {
+        currentIndex = 0;
+      } else {
+        currentIndex++;
+      }
+      updateSlide();
+    }, 4000);
+  }
+
+  function stopAutoPlay() {
+    if (autoPlayTimer) {
+      clearInterval(autoPlayTimer);
+      autoPlayTimer = null;
+    }
+  }
+
+  prevBtn?.addEventListener('click', () => {
+    stopAutoPlay();
+    currentIndex--;
+    updateSlide();
+    startAutoPlay();
+  });
+
+  nextBtn?.addEventListener('click', () => {
+    stopAutoPlay();
+    currentIndex++;
+    updateSlide();
+    startAutoPlay();
+  });
+
+  const wrapper = track.closest('.products__carousel-wrapper');
+  wrapper?.addEventListener('mouseenter', stopAutoPlay);
+  wrapper?.addEventListener('mouseleave', startAutoPlay);
+
+  window.addEventListener('resize', () => {
+    updateSlide();
+  });
+
+  // Initial offset calculation delay to ensure layout is fully rendered
+  setTimeout(() => {
+    updateSlide();
+    startAutoPlay();
+  }, 300);
 }
 
 // Run on DOM ready

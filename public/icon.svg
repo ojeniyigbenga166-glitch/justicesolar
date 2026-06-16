@@ -12,6 +12,6 @@
   <path d="M205 55 L240 85" stroke="#d35400" stroke-width="4" stroke-linecap="round"/>
 
   <!-- Text -->
-  <text x="200" y="115" font-family="'Outfit', sans-serif" font-weight="900" font-size="32" fill="#f5c518" text-anchor="middle" letter-spacing="1">JUSTICE GEORGENES</text>
+  <text x="200" y="115" font-family="'Outfit', sans-serif" font-weight="900" font-size="32" fill="#ffffff" text-anchor="middle" letter-spacing="1">JUSTICE GEORGENES</text>
   <text x="200" y="140" font-family="'Outfit', sans-serif" font-weight="700" font-size="18" fill="#ffffff" text-anchor="middle" letter-spacing="3" opacity="0.8">SOLAR CONSULTS</text>
 </svg>

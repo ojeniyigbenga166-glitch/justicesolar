@@ -307,10 +307,10 @@ function buildFilterButtons() {
   });
 
   // Rebuild — keep the "All Products" button then append one per category
-  filterBar.innerHTML = `<button class="filter-btn active" data-filter="all">All Products</button>`;
+  filterBar.innerHTML = `<button class="filter-btn ${activeFilter === 'all' ? 'active' : ''}" data-filter="all">All Products</button>`;
   categories.forEach(cat => {
     const btn = document.createElement('button');
-    btn.className = 'filter-btn';
+    btn.className = `filter-btn ${activeFilter === cat ? 'active' : ''}`;
     btn.dataset.filter = cat;
     btn.textContent = cat;
     filterBar.appendChild(btn);
@@ -323,6 +323,15 @@ function buildFilterButtons() {
       btn.classList.add('active');
       activeFilter = btn.dataset.filter;
       renderProducts();
+
+      // Update URL query param without reloading
+      const url = new URL(window.location.href);
+      if (activeFilter === 'all') {
+        url.searchParams.delete('category');
+      } else {
+        url.searchParams.set('category', activeFilter);
+      }
+      window.history.pushState({}, '', url);
     });
   });
 }
@@ -338,6 +347,13 @@ async function init() {
 
   // Fetch dynamic products from Supabase
   await fetchProducts();
+
+  // Read URL query parameter for category before building filter buttons
+  const params = new URLSearchParams(window.location.search);
+  const catParam = params.get('category');
+  if (catParam) {
+    activeFilter = catParam;
+  }
 
   // Build category filter buttons from whatever categories exist in the data
   buildFilterButtons();

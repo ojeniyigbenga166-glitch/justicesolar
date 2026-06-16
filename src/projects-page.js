@@ -10,35 +10,74 @@ function createNavbar() {
   nav.className = 'navbar';
   nav.id = 'navbar';
   nav.innerHTML = `
-    <!-- Logo -->
-    <div class="navbar__logo" id="logo-home">
-      <a href="/index.html" style="display: flex; align-items: center;">
-        <img src="/icon.svg" alt="Justice Georgenes Solar Consults" class="navbar__logo-img" />
-      </a>
+    <!-- Top Tier: Logo + Contact Info -->
+    <div class="navbar-top desktop-only">
+      <div class="navbar-top__left">
+        <div class="navbar__logo" id="logo-home">
+          <a href="/index.html"><img src="/icon.svg" alt="Justice Georgenes Solar Consults" class="navbar__logo-img" /></a>
+        </div>
+      </div>
+      <div class="navbar-top__right">
+        <div class="contact-block">
+          <div class="contact-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></div>
+          <div class="contact-text"><span>Akure</span><small>Cash-hold Complex, Ondo Rd</small></div>
+        </div>
+        <div class="contact-block">
+          <div class="contact-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></div>
+          <div class="contact-text"><span>Call us anytime</span><small>08147574404</small></div>
+        </div>
+        <div class="contact-block">
+          <div class="contact-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></div>
+          <div class="contact-text"><span>Send us a mail</span><small>ojeniyigbenga166@gmail.com</small></div>
+        </div>
+      </div>
     </div>
 
-    <!-- Desktop Nav Links -->
-    <ul class="navbar__links">
-      <li><a href="/index.html#home">Home</a></li>
-      <li><a href="/index.html#about">About</a></li>
-      <li><a href="/services.html" id="nav-services">Services</a></li>
-      <li><a href="/projects.html" style="color: var(--color-primary);">Projects</a></li>
-      <li><a href="/shop.html" id="nav-shop">Shop</a></li>
-      <li><a href="/index.html#contact">Contact</a></li>
-    </ul>
-
-    <!-- CTA -->
-    <button class="btn-cta desktop-only" id="nav-get-started">Get Started</button>
-
-    <!-- Cart Icon -->
-    <a href="/shop.html" class="navbar__cart" id="nav-cart" aria-label="Shopping cart">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-      <span class="navbar__cart-badge" id="cart-badge">0</span>
-    </a>
-
-    <!-- Hamburger -->
-    <div class="navbar__hamburger" id="hamburger" role="button" tabindex="0" aria-label="Open menu">
-      <span></span><span></span><span></span>
+    <!-- Bottom Tier: Nav Links -->
+    <div class="navbar-bottom">
+      <div class="navbar-bottom__left">
+        <div class="navbar__hamburger" id="hamburger" role="button" tabindex="0" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </div>
+        <div class="navbar__logo mobile-only">
+          <a href="/index.html"><img src="/icon.svg" alt="Justice Georgenes Solar Consults" class="navbar__logo-img" style="height:40px;" /></a>
+        </div>
+        <ul class="navbar__links">
+          <li><a href="/index.html#home">Home</a></li>
+          <li class="company-menu">
+            <a href="javascript:void(0)" style="display:flex;align-items:center;gap:4px;">Company <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
+            <ul class="company-dropdown">
+              <li><a href="/index.html#about">About Us</a></li>
+              <li><a href="/index.html#locations">Our Branches</a></li>
+              <li><a href="/index.html#how-it-works">Why Choose Us</a></li>
+              <li><a href="/index.html#testimonials">Testimonials</a></li>
+            </ul>
+          </li>
+          <li class="services-menu">
+            <a href="/services.html" id="nav-services" style="display:flex;align-items:center;gap:4px;">Services <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
+            <ul class="services-dropdown">
+              <li><a href="/services.html?service=product">Product</a></li>
+              <li><a href="/services.html?service=residential">Residential solar solution</a></li>
+              <li><a href="/services.html?service=industrial">Industrial solar solution</a></li>
+              <li><a href="/services.html?service=installment">installment plan</a></li>
+              <li><a href="/services.html?service=audits">Comprehensive Site Audits</a></li>
+              <li><a href="/services.html?service=installation">Professional Installation</a></li>
+              <li><a href="/services.html?service=maintenance">Maintenance &amp; Support</a></li>
+              <li><a href="/services.html?service=training">Solar Training Program</a></li>
+            </ul>
+          </li>
+          <li><a href="/projects.html" style="color: var(--color-accent);">Projects</a></li>
+          <li><a href="/shop.html" id="nav-shop">Shop</a></li>
+          <li><a href="/index.html#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="navbar-bottom__right">
+        <a href="/shop.html" class="navbar__cart" id="nav-cart" aria-label="Shopping cart">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+          <span class="navbar__cart-badge" id="cart-badge">0</span>
+        </a>
+        <button class="btn-cta-full desktop-only" id="nav-get-started">Get Started</button>
+      </div>
     </div>
   `;
   return nav;
@@ -51,8 +90,20 @@ function createMobileMenu() {
   menu.id = 'mobile-menu';
   menu.innerHTML = `
     <a href="/index.html#home">Home</a>
-    <a href="/index.html#about">About</a>
-    <a href="/services.html" id="mob-services">Services</a>
+    <div style="padding: 1rem 2rem; color: rgba(255, 255, 255, 0.5); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Company</div>
+    <a href="/index.html#about" style="padding: 0.5rem 3rem; font-size: 1rem;">About Us</a>
+    <a href="/index.html#locations" style="padding: 0.5rem 3rem; font-size: 1rem;">Our Branches</a>
+    <a href="/index.html#how-it-works" style="padding: 0.5rem 3rem; font-size: 1rem;">Why Choose Us</a>
+    <a href="/index.html#testimonials" style="padding: 0.5rem 3rem; font-size: 1rem;">Testimonials</a>
+    <div style="padding: 1rem 2rem; color: rgba(255, 255, 255, 0.5); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Services</div>
+    <a href="/services.html?service=product" style="padding: 0.5rem 3rem; font-size: 1rem;">Product</a>
+    <a href="/services.html?service=residential" style="padding: 0.5rem 3rem; font-size: 1rem;">Residential Solar Solution</a>
+    <a href="/services.html?service=industrial" style="padding: 0.5rem 3rem; font-size: 1rem;">Industrial Solar Solution</a>
+    <a href="/services.html?service=installment" style="padding: 0.5rem 3rem; font-size: 1rem;">installment plan</a>
+    <a href="/services.html?service=audits" style="padding: 0.5rem 3rem; font-size: 1rem;">Comprehensive Site Audits</a>
+    <a href="/services.html?service=installation" style="padding: 0.5rem 3rem; font-size: 1rem;">Professional Installation</a>
+    <a href="/services.html?service=maintenance" style="padding: 0.5rem 3rem; font-size: 1rem;">Maintenance &amp; Support</a>
+    <a href="/services.html?service=training" style="padding: 0.5rem 3rem; font-size: 1rem;">Solar Training Program</a>
     <a href="/projects.html" style="color: var(--color-primary);">Projects</a>
     <a href="/shop.html" id="mob-shop">Shop</a>
     <a href="/index.html#contact">Contact</a>
@@ -253,8 +304,8 @@ function createProjects() {
     <div style="max-width: 1180px; margin: 0 auto; padding: calc(80px + 2rem) 2rem 3rem;">
       <div style="text-align: center; margin-bottom: 2.5rem;">
         <p style="color: #FDB813; font-weight: 700; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.5rem;">OUR PORTFOLIO</p>
-        <h2 style="font-family: 'Outfit', sans-serif; font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 900; color: #071B3B; margin-bottom: 0.8rem;">Explore Our Work</h2>
-        <p style="font-size: 1rem; color: #475569; max-width: 600px; margin: 0 auto;">Select a category below to see our successful installations and energy solutions</p>
+        <h2 style="font-family: 'Outfit', sans-serif; font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 900; color: #1E6B4B; margin-bottom: 0.8rem;">Explore Our Work</h2>
+        <p style="font-size: 1rem; color: #1C1C1C; max-width: 600px; margin: 0 auto;">Select a category below to see our successful installations and energy solutions</p>
       </div>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
         ${categoryHTML}

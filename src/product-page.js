@@ -93,7 +93,7 @@ function buildProductPage(product) {
   `).join('');
 
   main.innerHTML = `
-    <div class="product-detail__container">
+    <div class="product-detail__container subpage-container">
 
       <!-- Breadcrumb -->
       <nav class="breadcrumb" aria-label="Breadcrumb">
