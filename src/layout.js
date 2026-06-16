@@ -388,13 +388,25 @@ export function initNavbar(openCartFn) {
   }, { passive: true });
 
   // Hamburger
-  hamburger?.addEventListener('click', () => mobileMenuEl?.classList.toggle('open'));
+  hamburger?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    mobileMenuEl?.classList.toggle('open');
+  });
   mobileMenuEl?.querySelectorAll('a, button').forEach(el => {
     el.addEventListener('click', (e) => {
       if (!el.classList.contains('mobile-menu-toggle')) {
         mobileMenuEl.classList.remove('open');
       }
     });
+  });
+
+  // Close mobile menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (mobileMenuEl?.classList.contains('open')) {
+      if (!mobileMenuEl.contains(e.target) && !hamburger?.contains(e.target)) {
+        mobileMenuEl.classList.remove('open');
+      }
+    }
   });
 
   // Submenu toggle

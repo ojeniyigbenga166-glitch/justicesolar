@@ -1398,7 +1398,8 @@ function init() {
   // --- Hamburger toggle ---
   const hamburger = document.getElementById('hamburger');
   const mobileMenuEl = document.getElementById('mobile-menu');
-  hamburger.addEventListener('click', () => {
+  hamburger.addEventListener('click', (e) => {
+    e.stopPropagation();
     mobileMenuEl.classList.toggle('open');
   });
 
@@ -1410,6 +1411,15 @@ function init() {
         mobileMenuEl.classList.remove('open');
       }
     });
+  });
+
+  // Close mobile menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (mobileMenuEl.classList.contains('open')) {
+      if (!mobileMenuEl.contains(e.target) && !hamburger.contains(e.target)) {
+        mobileMenuEl.classList.remove('open');
+      }
+    }
   });
 
   // Collapsible submenus
