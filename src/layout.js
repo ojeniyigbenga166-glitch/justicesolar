@@ -100,22 +100,39 @@ export function createMobileMenu() {
   menu.id = 'mobile-menu';
   menu.innerHTML = `
     <a href="/index.html#home">Home</a>
-    <div style="padding: 1rem 2rem; color: rgba(255, 255, 255, 0.5); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Company</div>
-    <a href="/index.html#about" style="padding: 0.5rem 3rem; font-size: 1rem;">About Us</a>
-    <a href="/index.html#locations" style="padding: 0.5rem 3rem; font-size: 1rem;">Our Branches</a>
-    <a href="/index.html#how-it-works" style="padding: 0.5rem 3rem; font-size: 1rem;">Why Choose Us</a>
-    <a href="/index.html#testimonials" style="padding: 0.5rem 3rem; font-size: 1rem;">Testimonials</a>
-    <div style="padding: 1rem 2rem; color: rgba(255, 255, 255, 0.5); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Services</div>
-    <a href="/services.html?service=product" style="padding: 0.5rem 3rem; font-size: 1rem;">Product</a>
-    <a href="/services.html?service=residential" style="padding: 0.5rem 3rem; font-size: 1rem;">Residential Solar Solution</a>
-    <a href="/services.html?service=industrial" style="padding: 0.5rem 3rem; font-size: 1rem;">Industrial Solar Solution</a>
-    <a href="/services.html?service=installment" style="padding: 0.5rem 3rem; font-size: 1rem;">installment plan</a>
-    <a href="/services.html?service=audits" style="padding: 0.5rem 3rem; font-size: 1rem;">Comprehensive Site Audits</a>
-    <a href="/services.html?service=installation" style="padding: 0.5rem 3rem; font-size: 1rem;">Professional Installation</a>
-    <a href="/services.html?service=maintenance" style="padding: 0.5rem 3rem; font-size: 1rem;">Maintenance &amp; Support</a>
-    <a href="/services.html?service=training" style="padding: 0.5rem 3rem; font-size: 1rem;">Solar Training Program</a>
+    
+    <!-- Company Collapsible -->
+    <div class="mobile-sections-menu">
+      <button class="mobile-menu-toggle" data-menu="company">
+        Company <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 6px; transition: transform 0.3s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
+      <div class="mobile-submenu" id="mobile-company-submenu">
+        <a href="/index.html#about" class="mobile-submenu-link">About Us</a>
+        <a href="/index.html#locations" class="mobile-submenu-link">Our Branches</a>
+        <a href="/index.html#how-it-works" class="mobile-submenu-link">Why Choose Us</a>
+        <a href="/index.html#testimonials" class="mobile-submenu-link">Testimonials</a>
+      </div>
+    </div>
+
+    <!-- Services Collapsible -->
+    <div class="mobile-sections-menu">
+      <button class="mobile-menu-toggle" data-menu="services">
+        Services <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 6px; transition: transform 0.3s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
+      <div class="mobile-submenu" id="mobile-services-submenu">
+        <a href="/services.html?service=product" class="mobile-submenu-link">Product</a>
+        <a href="/services.html?service=residential" class="mobile-submenu-link">Residential Solar Solution</a>
+        <a href="/services.html?service=industrial" class="mobile-submenu-link">Industrial Solar Solution</a>
+        <a href="/services.html?service=installment" class="mobile-submenu-link">installment plan</a>
+        <a href="/services.html?service=audits" class="mobile-submenu-link">Comprehensive Site Audits</a>
+        <a href="/services.html?service=installation" class="mobile-submenu-link">Professional Installation</a>
+        <a href="/services.html?service=maintenance" class="mobile-submenu-link">Maintenance &amp; Support</a>
+        <a href="/services.html?service=training" class="mobile-submenu-link">Solar Training Program</a>
+      </div>
+    </div>
+
     <a href="/projects.html">Projects</a>
-    <a href="/shop.html" style="color:var(--color-primary)">Shop</a>
+    <a href="/shop.html">Shop</a>
     <a href="/index.html#contact">Contact</a>
     <button class="btn-cta" id="mob-cta" style="margin-top:0.5rem;width:fit-content">Get Started</button>
   `;
@@ -373,7 +390,34 @@ export function initNavbar(openCartFn) {
   // Hamburger
   hamburger?.addEventListener('click', () => mobileMenuEl?.classList.toggle('open'));
   mobileMenuEl?.querySelectorAll('a, button').forEach(el => {
-    el.addEventListener('click', () => mobileMenuEl.classList.remove('open'));
+    el.addEventListener('click', (e) => {
+      if (!el.classList.contains('mobile-menu-toggle')) {
+        mobileMenuEl.classList.remove('open');
+      }
+    });
+  });
+
+  // Submenu toggle
+  mobileMenuEl?.querySelectorAll('.mobile-menu-toggle').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const menu = btn.getAttribute('data-menu');
+      const submenu = mobileMenuEl.querySelector(`#mobile-${menu}-submenu`);
+      const arrow = btn.querySelector('svg');
+      
+      const isOpen = submenu?.classList.contains('open');
+      
+      mobileMenuEl.querySelectorAll('.mobile-submenu').forEach(sub => {
+        sub.classList.remove('open');
+        const otherArrow = sub.previousElementSibling.querySelector('svg');
+        if (otherArrow) otherArrow.style.transform = 'rotate(0deg)';
+      });
+      
+      if (!isOpen) {
+        submenu?.classList.add('open');
+        if (arrow) arrow.style.transform = 'rotate(180deg)';
+      }
+    });
   });
 
   // Get Started buttons

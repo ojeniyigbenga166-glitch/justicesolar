@@ -3253,6 +3253,10 @@ img {
     z-index: 10;
   }
 
+  .hero {
+    min-height: 55vh !important;
+  }
+
   .hero__stats { position: relative; bottom: auto; left: auto; flex-wrap: wrap; margin: 2rem 5% 0; }
   .hero__stat-item { flex: 1; min-width: 100px; }
   .hero__scroll { display: none; }
