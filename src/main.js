@@ -990,7 +990,7 @@ function createFooter() {
           <ul>
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About Us</a></li>
-            <li><a href="#services">Services</a></li>
+            <li><a href="/services.html">Services</a></li>
             <li><a href="/projects.html">Projects</a></li>
             <li><a href="#contact">Contact Us</a></li>
           </ul>
@@ -1557,7 +1557,7 @@ async function initProductsCarousel() {
         <p class="carousel-product-desc">${p.shortDescription || ''}</p>
         <div class="carousel-product-footer">
           <span class="carousel-product-price">₦${p.price.toLocaleString()}</span>
-          <a href="/shop/product.html?id=${p.id}" class="carousel-product-link">
+          <a href="/shop/product.html?slug=${p.slug}" class="carousel-product-link">
             View Details
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>

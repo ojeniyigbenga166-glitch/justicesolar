@@ -1,343 +1,231 @@
 import './style.css';
 import { supabase } from './supabase.js';
+import {
+  createNavbar,
+  createMobileMenu,
+  createFooter,
+  initNavbar,
+  openGetStartedModal,
+  createCartDrawer,
+  openCartDrawer,
+  updateCartBadge
+} from './layout.js';
+import { getCartCount } from './cart.js';
 
 // ==============================
-// NAVBAR Component (Services Page)
-// ==============================
-function createNavbar() {
-  const nav = document.createElement('nav');
-  nav.className = 'navbar';
-  nav.id = 'navbar';
-  nav.innerHTML = `
-    <!-- Logo -->
-    <div class="navbar__logo" id="logo-home">
-      <a href="/index.html" style="display: flex; align-items: center;">
-        <img src="/icon.svg" alt="Justice Georgenes Solar Consults" class="navbar__logo-img" />
-      </a>
-    </div>
-
-    <!-- Desktop Nav Links -->
-    <ul class="navbar__links">
-      <li><a href="/index.html#home">Home</a></li>
-      <li><a href="/index.html#about">About</a></li>
-      <li><a href="/services.html" id="nav-services" style="color: var(--color-primary);">Services</a></li>
-      <li><a href="/projects.html">Projects</a></li>
-      <li><a href="/shop.html" id="nav-shop">Shop</a></li>
-      <li><a href="/index.html#contact">Contact</a></li>
-    </ul>
-
-    <!-- CTA -->
-    <button class="btn-cta desktop-only" id="nav-get-started">Get Started</button>
-
-    <!-- Cart Icon -->
-    <a href="/shop.html" class="navbar__cart" id="nav-cart" aria-label="Shopping cart">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-      <span class="navbar__cart-badge" id="cart-badge">0</span>
-    </a>
-
-    <!-- Hamburger -->
-    <div class="navbar__hamburger" id="hamburger" aria-label="Open menu">
-      <span></span><span></span><span></span>
-    </div>
-  `;
-  return nav;
-}
-
-// Mobile menu
-function createMobileMenu() {
-  const menu = document.createElement('div');
-  menu.className = 'navbar__mobile';
-  menu.id = 'mobile-menu';
-  menu.innerHTML = `
-    <a href="/index.html#home">Home</a>
-    <a href="/index.html#about">About</a>
-    <a href="/services.html" style="color: var(--color-primary);">Services</a>
-    <a href="/projects.html">Projects</a>
-    <a href="/shop.html" id="mob-shop">Shop</a>
-    <a href="/index.html#contact">Contact</a>
-    <button class="btn-cta" id="mob-cta" style="margin-top:0.5rem;width:fit-content">Get Started</button>
-  `;
-  return menu;
-}
-
-// ==============================
-// Services Data
+// Services Data (8 Services)
 // ==============================
 const servicesData = [
-   {
-    id: 1,
-    title: 'Comprehensive Site Audits',
-    description: 'Professional roof inspection and energy consumption analysis to design optimal solar solutions for your property.',
-    features: ['Professional roof inspection', 'Energy consumption analysis', 'Shading assessment', 'Detailed audit report'],
-    image: '/project 9.jpg'
-  },
   {
-    id: 2,
-    title: 'Solar Product Sales',
-    description: 'Premium solar panels, inverters, batteries, and mounting systems from leading manufacturers with warranty coverage.',
-    features: ['Top-tier solar panels', 'Advanced inverter technology', 'Battery storage solutions', 'Professional installation included'],
+    id: 1,
+    slug: 'product',
+    title: 'Product (Solar Products)',
+    meta: 'Premium Hardware',
+    description: 'Premium solar panels, hybrid inverters, deep cycle/lithium batteries, and mounting kits from leading global manufacturers with solid warranty coverage. Sourced and tested to handle rigorous weather and deliver peak power output.',
+    features: ['Top-Tier Tier-1 Panels', 'Smart Hybrid Inverters', 'High-capacity LiFePO4 storage', 'Accessories & mounting kits'],
     image: '/product 1.png'
   },
   {
+    id: 2,
+    slug: 'residential',
+    title: 'Residential Solar Solution',
+    meta: 'For Homeowners',
+    description: 'Tailored home solar systems configured to power your lighting, TV, refrigerator, AC, and other household appliances reliably. Features smart grid/battery backup so you never experience a blackout.',
+    features: ['Custom residential designs', 'Uninterrupted power transitions', 'Smart load management guidance', 'Substantial grid savings'],
+    image: '/product 3.png'
+  },
+  {
     id: 3,
-    title: 'Professional Installation',
-    description: 'Certified technicians handle complete solar system installation with precision, safety, and peak efficiency.',
-    features: ['Certified installer team', 'Full system integration', 'Safety compliance', 'System testing & optimization'],
-    image: '/project 1.jpg'
+    slug: 'industrial',
+    title: 'Industrial Solar Solution',
+    meta: 'For Businesses',
+    description: 'Scalable commercial and industrial solar power plants designed for businesses, factories, schools, and hospitals to minimize utility costs and grid dependency. Perfect for large-scale operations requiring stable 3-phase power.',
+    features: ['Megawatt-scale PV designs', 'Grid-tie & hybrid industrial systems', 'Detailed ROI analysis', 'Zero disruption during deployment'],
+    image: '/product 2.png'
   },
   {
     id: 4,
-    title: 'Maintenance & Support',
-    description: 'Comprehensive maintenance plans and 24/7 technical assistance to keep your system operating at peak performance.',
-    features: ['Regular maintenance visits', 'System monitoring', 'Emergency repairs', 'Performance optimization'],
-    image: '/project 7.jpg'
+    slug: 'installment',
+    title: 'Installment Plan',
+    meta: 'Flexible Financing',
+    description: 'Flexible and structured financing models designed to help homeowners and businesses deploy solar installations without high upfront costs. Spread your energy investment over comfortable monthly plans.',
+    features: ['Low initial down payment', 'Structured monthly installments', 'Transparent interest rates', 'Path to 100% system ownership'],
+    image: '/project 8.jpg'
   },
   {
     id: 5,
+    slug: 'audits',
+    title: 'Comprehensive Site Audits',
+    meta: 'Analysis & Sizing',
+    description: 'Professional roof assessment, structural inspection, shading analysis, and energy consumption audits. We build a precise energy profile to design the most efficient solar layout for your exact needs.',
+    features: ['Structural integrity checks', 'Advanced shading simulations', 'Detailed load consumption profiles', 'Custom system sizing report'],
+    image: '/project 9.jpg'
+  },
+  {
+    id: 6,
+    slug: 'installation',
+    title: 'Professional Installation',
+    meta: 'Expert Construction',
+    description: 'Precision installation by certified solar engineers adhering strictly to international electrical standards and safety codes. We handle wiring, mounting, grounding, and inverter configuration.',
+    features: ['Certified engineering crew', 'Rapid and clean installation', 'Comprehensive safety compliance', 'Post-install testing & commission'],
+    image: '/project 1.jpg'
+  },
+  {
+    id: 7,
+    slug: 'maintenance',
+    title: 'Maintenance & Support',
+    meta: 'Ongoing Reliability',
+    description: 'Routine checks, panel cleaning, battery management optimization, and rapid-response technical support to maintain maximum yield. We ensure your solar investment remains productive for decades.',
+    features: ['Scheduled site checkups', 'Automated system monitoring', 'Prompt troubleshooting response', 'Warranty management support'],
+    image: '/project 7.jpg'
+  },
+  {
+    id: 8,
+    slug: 'training',
     title: 'Solar Training Program',
-    description: 'Hands-on technical training for aspiring professionals in the renewable energy industry with industry certification.',
-    features: ['Hands-on practical sessions', 'Certification upon completion', 'Expert industry instructors', 'Career guidance & support'],
+    meta: 'Skills Development',
+    description: 'Practical, hands-on academy training for aspiring solar installers, technicians, and renewable energy entrepreneurs. Learn system design, safety protocols, solar arithmetic, and practical troubleshooting.',
+    features: ['Live installation practice', 'Recognized certifications', 'Experienced field facilitators', 'Job placement opportunities'],
     image: '/solar training.jpg'
   }
 ];
+
+// Active State
+let currentActiveIndex = 0;
 
 // ==============================
 // Services Section Component
 // ==============================
 function createServicesSection() {
   const section = document.createElement('section');
-  section.className = 'services-page';
+  section.className = 'services-page subpage-container';
   section.id = 'services-page';
 
-  let servicesHTML = '';
-  servicesData.forEach((service, index) => {
-    const isEven = index % 2 === 0;
-    const featuresHTML = service.features.map(feature => `<li>${feature}</li>`).join('');
+  // Build Desktop Sidebar buttons
+  const sidebarButtonsHTML = servicesData.map((service, idx) => `
+    <button class="services-sidebar__btn ${idx === currentActiveIndex ? 'active' : ''}" data-index="${idx}">
+      ${service.title}
+    </button>
+  `).join('');
 
-    servicesHTML += `
-      <div class="service-section ${isEven ? 'text-first' : 'image-first'}">
-        <div class="service-content">
-          <div class="service-text">
-            <h2 class="service-title">${service.title}</h2>
-            <p class="service-description">${service.description}</p>
-            <ul class="service-features">
-              ${featuresHTML}
-            </ul>
-          </div>
-          <div class="service-image">
-            <img src="${service.image}" alt="${service.title}" onerror="this.src='https://via.placeholder.com/500x400?text=${encodeURIComponent(service.title)}'"/>
-          </div>
-        </div>
-      </div>
-    `;
-  });
+  // Build Mobile Select Options
+  const mobileOptionsHTML = servicesData.map((service, idx) => `
+    <option value="${idx}" ${idx === currentActiveIndex ? 'selected' : ''}>
+      ${service.title}
+    </option>
+  `).join('');
 
   section.innerHTML = `
-    <div class="services-page__container">
-      <div class="services-page__header">
-        <p class="section-label">OUR EXPERTISE</p>
-        <h1 class="services-page__title">Our Services</h1>
-        <p class="services-page__desc">Comprehensive solar solutions from assessment to ongoing support</p>
+    <div class="services-page__header">
+      <p class="section-label">OUR EXPERTISE</p>
+      <h1 class="services-page__title">Our Services &amp; Solutions</h1>
+      <p class="services-page__desc">Explore our comprehensive solar energy services tailored for every scale.</p>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div class="services-mobile-select-wrap">
+      <label for="services-mobile-menu" style="display:block; margin-bottom: 0.5rem; font-weight:700; font-size:0.9rem; color:var(--color-text-heading);">SELECT A SERVICE</label>
+      <select id="services-mobile-menu" class="services-mobile-select">
+        ${mobileOptionsHTML}
+      </select>
+    </div>
+
+    <!-- Two-Column Blog-style Layout -->
+    <div class="services-layout">
+      <!-- Left Sidebar (Desktop only) -->
+      <aside class="services-sidebar">
+        <h3 class="services-sidebar__title">All Services</h3>
+        <div class="services-sidebar__list">
+          ${sidebarButtonsHTML}
+        </div>
+      </aside>
+
+      <!-- Right Main Concept panel -->
+      <div class="services-main-concept" id="services-concept-panel">
+        <!-- Content will be injected dynamically -->
       </div>
-      ${servicesHTML}
     </div>
   `;
 
   return section;
 }
 
-// ==============================
-// FOOTER Component
-// ==============================
-function createFooter() {
-  const footer = document.createElement('footer');
-  footer.className = 'footer-section';
-  footer.id = 'footer';
-  footer.innerHTML = `
-    <!-- CTA Banner -->
-    <div class="footer-cta">
-      <div class="footer-cta__bg"></div>
-      <div class="footer-cta__overlay"></div>
-      <div class="footer-cta__content">
-        <div class="footer-cta__text">
-          <h2>Start Saving With Solar Today</h2>
-          <p>Join thousands of happy customers and take the first step towards a brighter, cleaner future.</p>
-        </div>
-        <div class="footer-cta__actions">
-          <button class="btn-cta-yellow" id="footer-get-quote">Get Free Quote</button>
-          <button class="btn-cta-outline" id="footer-speak-expert">Speak With Expert <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></button>
-        </div>
+// Update the Concept panel HTML based on selection
+function updateConceptPanel() {
+  const panel = document.getElementById('services-concept-panel');
+  if (!panel) return;
+
+  const service = servicesData[currentActiveIndex];
+
+  // Transition effect
+  panel.style.opacity = '0';
+  panel.style.transform = 'translateY(15px)';
+
+  setTimeout(() => {
+    const featuresHTML = service.features.map(feat => `
+      <div class="services-concept__feature-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        <span>${feat}</span>
       </div>
-    </div>
+    `).join('');
 
-    <!-- Main Footer -->
-    <div class="footer-main">
-      <div class="footer__container">
-        <!-- Brand Column -->
-        <div class="footer__col brand-col">
-          <div class="footer__logo">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="var(--color-primary)"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-            <div class="footer__logo-text">
-              <h3>Justice Georgenes</h3>
-              <span>Powering a Brighter Tomorrow</span>
-            </div>
-          </div>
-          <p class="footer__desc">We provide smart solar solutions for homes and businesses to save money and protect the planet.</p>
-          <div class="footer__socials">
-            <span><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></span>
-            <span><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></span>
-            <span><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></span>
-            <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></span>
-          </div>
-        </div>
+    panel.innerHTML = `
+      <div class="services-concept__meta">${service.meta}</div>
+      <h2 class="services-concept__title">${service.title}</h2>
 
-        <!-- Links Columns -->
-        <div class="footer__col">
-          <h4>Quick Links</h4>
-          <ul>
-            <li><a href="/index.html#home">Home</a></li>
-            <li><a href="/index.html#about">About Us</a></li>
-            <li><a href="/services.html">Services</a></li>
-            <li><a href="/projects.html">Projects</a></li>
-            <li><a href="/index.html#contact">Contact Us</a></li>
-          </ul>
-        </div>
-
-        <div class="footer__col">
-          <h4>Solar Solutions</h4>
-          <ul>
-            <li>Residential Solar</li>
-            <li>Commercial Solar</li>
-            <li>Battery Storage</li>
-            <li>Maintenance & Repair</li>
-            <li>Solar Consultation</li>
-          </ul>
-        </div>
-
-        <div class="footer__col">
-          <h4>Support</h4>
-          <ul>
-            <li>FAQ</li>
-            <li>About us</li>
-            <li>Warranty</li>
-            <li>Terms & Conditions</li>
-            <li>Privacy Policy</li>
-          </ul>
-        </div>
-
-        <div class="footer__col contact-col">
-          <h4>Contact Us</h4>
-          <ul>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent)"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> <span>08147574404</span></li>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent)"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> <span>Justicegeorgenes2@gmail.com</span></li>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent); flex-shrink: 0;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> <span>SUITES 162 CASHHOLD ARAKALE ROAD,<br/>AKURE ONDO STATE</span></li>
-          </ul>
-        </div>
+      <div class="services-concept__img-wrap">
+        <img class="services-concept__img" src="${service.image}" alt="${service.title}" onerror="this.src='https://via.placeholder.com/800x450?text=${encodeURIComponent(service.title)}'" />
       </div>
-    </div>
 
-    <div class="footer__bottom">
-      <p>&copy; ${new Date().getFullYear()} Justice Georgenes Nig Limited. All rights reserved.</p>
-    </div>
-  `;
+      <p class="services-concept__desc">${service.description}</p>
 
-  return footer;
-}
+      <h3 class="services-concept__features-title">What is included:</h3>
+      <div class="services-concept__features-grid">
+        ${featuresHTML}
+      </div>
 
-// ==============================
-// GET STARTED MODAL
-// ==============================
-function createGetStartedModal() {
-  let modal = document.getElementById('get-started-modal');
-  if (!modal) {
-    const modalHTML = `
-      <div class="modal-overlay" id="get-started-modal">
-        <div class="modal-content">
-          <button class="modal-close" id="modal-close-btn">&times;</button>
-          <h2 class="modal-title">Get Started With Solar Energy</h2>
-          <p class="modal-subtitle">Fill in your details and we'll get back to you</p>
-          <form id="get-started-form" class="modal-form">
-            <div class="form-group">
-              <label for="name">Full Name</label>
-              <input type="text" id="name" name="name" placeholder="Your full name" required>
-            </div>
-            
-            <div class="form-group">
-              <label for="email">Email Address</label>
-              <input type="email" id="email" name="email" placeholder="your.email@gmail.com" required>
-            </div>
-            
-            <div class="form-group">
-              <label for="address">Address</label>
-              <input type="text" id="address" name="address" placeholder="Your address" required>
-            </div>
-            
-            <div class="form-group">
-              <label for="message">What Do You Want?</label>
-              <textarea id="message" name="message" placeholder="Describe your solar energy needs..." rows="2" required></textarea>
-            </div>
-            
-            <button type="submit" class="btn-primary modal-submit">Submit Request</button>
-          </form>
-        </div>
+      <div class="services-concept__cta">
+        <button class="btn-primary" id="btn-service-inquiry">
+          Inquire About This Service
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left:6px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
       </div>
     `;
-    document.body.insertAdjacentHTML('beforeend', modalHTML);
-    modal = document.getElementById('get-started-modal');
-    
-    // Handle form submission
-    document.getElementById('get-started-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const address = document.getElementById('address').value;
-      const message = document.getElementById('message').value;
 
-      // Save lead to Supabase
-      try {
-        await supabase
-          .from('leads')
-          .insert([{
-            name: name,
-            email: email,
-            message: message,
-            notes: `Address: ${address}`,
-            source: 'Website Modal',
-            status: 'new'
-          }]);
-      } catch (err) {
-        console.error('Failed to save lead to database:', err);
-      }
-      
-      const subject = encodeURIComponent(`New Inquiry from ${name}`);
-      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nAddress: ${address}\n\nMessage:\n${message}`);
-      window.location.href = `mailto:Justicegeorgenes2@gmail.com?subject=${subject}&body=${body}`;
-      
-      closeGetStartedModal();
-      document.getElementById('get-started-form').reset();
-    });
-    
-    // Close modal on click
-    document.getElementById('modal-close-btn').addEventListener('click', closeGetStartedModal);
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) closeGetStartedModal();
-    });
-  }
-  return modal;
+    // Rebind get started click
+    document.getElementById('btn-service-inquiry')?.addEventListener('click', openGetStartedModal);
+
+    panel.style.opacity = '1';
+    panel.style.transform = 'translateY(0)';
+  }, 200);
 }
 
-function openGetStartedModal() {
-  const modal = createGetStartedModal();
-  modal.classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
+// Handle Service Selection changes
+function switchService(index, updateURL = true) {
+  currentActiveIndex = parseInt(index);
 
-function closeGetStartedModal() {
-  const modal = document.getElementById('get-started-modal');
-  if (modal) {
-    modal.classList.remove('active');
-    document.body.style.overflow = '';
+  // Update URL param without reloading
+  if (updateURL) {
+    const service = servicesData[currentActiveIndex];
+    const url = new URL(window.location.href);
+    url.searchParams.set('service', service.slug);
+    window.history.pushState({}, '', url);
   }
+
+  // Update active state in Desktop Sidebar buttons
+  const sidebarBtns = document.querySelectorAll('.services-sidebar__btn');
+  sidebarBtns.forEach((btn, idx) => {
+    btn.classList.toggle('active', idx === currentActiveIndex);
+  });
+
+  // Update Mobile Dropdown value
+  const mobileSelect = document.getElementById('services-mobile-menu');
+  if (mobileSelect) {
+    mobileSelect.value = currentActiveIndex;
+  }
+
+  // Render content
+  updateConceptPanel();
 }
 
 // ==============================
@@ -346,71 +234,69 @@ function closeGetStartedModal() {
 function init() {
   const app = document.getElementById('app');
 
-  const navbar = createNavbar();
+  // Build shared layout elements
+  const navbar = createNavbar('services');
   const mobileMenu = createMobileMenu();
-  const services = createServicesSection();
+  const servicesSection = createServicesSection();
   const footer = createFooter();
 
   app.appendChild(navbar);
   app.appendChild(mobileMenu);
-  app.appendChild(services);
+  app.appendChild(servicesSection);
   app.appendChild(footer);
 
-  // --- Navbar scroll effect ---
-  const navEl = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
-    navEl.classList.toggle('scrolled', window.scrollY > 40);
-  }, { passive: true });
-
-  // --- Hamburger toggle ---
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenuEl = document.getElementById('mobile-menu');
-  hamburger.addEventListener('click', () => {
-    mobileMenuEl.classList.toggle('open');
+  // Initialize shared navbar interactive logic
+  initNavbar(() => {
+    createCartDrawer();
+    openCartDrawer();
   });
 
-  // Close mobile menu on link click
-  mobileMenuEl.querySelectorAll('a, button').forEach(el => {
-    el.addEventListener('click', () => mobileMenuEl.classList.remove('open'));
-  });
+  // Setup cart badge
+  updateCartBadge(getCartCount());
 
-  // --- Get Started Modal ---
-  const getStartedButtons = [
-    document.getElementById('nav-get-started'),
-    document.getElementById('mob-cta'),
-    document.getElementById('footer-get-quote'),
-    document.getElementById('footer-speak-expert')
-  ];
-  
-  getStartedButtons.forEach(btn => {
-    if (btn) {
-      btn.addEventListener('click', openGetStartedModal);
-    }
-  });
-
-  // --- Contact Links to Modal ---
-  const contactLinks = document.querySelectorAll('a[href*="#contact"]');
-  contactLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      openGetStartedModal();
-    });
-  });
-
-  // --- Update Cart Badge ---
-  function updateCartBadge() {
-    const badge = document.getElementById('cart-badge');
-    if (badge) {
-      const cartItems = JSON.parse(localStorage.getItem('solarCart') || '[]');
-      const count = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-      badge.textContent = count;
-      badge.style.display = count > 0 ? 'flex' : 'none';
+  // Check URL query parameters to set initial active service
+  const params = new URLSearchParams(window.location.search);
+  const serviceSlug = params.get('service');
+  if (serviceSlug) {
+    const activeIdx = servicesData.findIndex(s => s.slug === serviceSlug);
+    if (activeIdx !== -1) {
+      currentActiveIndex = activeIdx;
     }
   }
-  updateCartBadge();
+
+  // Initial render of panel content
+  switchService(currentActiveIndex, false);
+
+  // Wire up sidebar click handlers
+  document.querySelector('.services-sidebar')?.addEventListener('click', e => {
+    const btn = e.target.closest('.services-sidebar__btn');
+    if (btn) {
+      const idx = btn.dataset.index;
+      switchService(idx);
+    }
+  });
+
+  // Wire up mobile select change handler
+  document.getElementById('services-mobile-menu')?.addEventListener('change', e => {
+    switchService(e.target.value);
+  });
+
+  // Listen for history popstates (back/forward or external nav links)
+  window.addEventListener('popstate', () => {
+    const freshParams = new URLSearchParams(window.location.search);
+    const freshSlug = freshParams.get('service');
+    if (freshSlug) {
+      const activeIdx = servicesData.findIndex(s => s.slug === freshSlug);
+      if (activeIdx !== -1) {
+        switchService(activeIdx, false);
+      }
+    } else {
+      switchService(0, false);
+    }
+  });
 }
 
-// Run on DOM ready — handle case where DOM is already parsed (ES module defer)
+// Run immediately or defer
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', init);
 } else {

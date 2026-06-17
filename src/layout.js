@@ -52,7 +52,7 @@ export function createNavbar(activePage = '') {
         <ul class="navbar__links">
           <li><a href="/index.html#home">Home</a></li>
           <li class="company-menu">
-            <a href="javascript:void(0)" style="display:flex;align-items:center;gap:4px;">Company <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
+            <a href="javascript:void(0)" class="navbar__menu-link">Company <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
             <ul class="company-dropdown">
               <li><a href="/index.html#about">About Us</a></li>
               <li><a href="/index.html#locations">Our Branches</a></li>
@@ -61,7 +61,7 @@ export function createNavbar(activePage = '') {
             </ul>
           </li>
           <li class="services-menu">
-            <a href="/services.html" style="display:flex;align-items:center;gap:4px;color:\${activePage==='services'?'var(--color-accent)':'var(--color-white)'}">Services <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
+            <a href="/services.html" class="navbar__menu-link ${activePage === 'services' ? 'active' : ''}">Services <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
             <ul class="services-dropdown">
               <li><a href="/services.html?service=product">Product</a></li>
               <li><a href="/services.html?service=residential">Residential solar solution</a></li>
@@ -73,8 +73,8 @@ export function createNavbar(activePage = '') {
               <li><a href="/services.html?service=training">Solar Training Program</a></li>
             </ul>
           </li>
-          <li><a href="/projects.html" \${activePage==='projects'?'style="color:var(--color-accent)"':''}>Projects</a></li>
-          <li><a href="/shop.html" style="color:\${activePage==='shop'?'var(--color-accent)':'var(--color-white)'}">Shop</a></li>
+          <li><a href="/projects.html" class="navbar__menu-link ${activePage === 'projects' ? 'active' : ''}">Projects</a></li>
+          <li><a href="/shop.html" class="navbar__menu-link ${activePage === 'shop' ? 'active' : ''}">Shop</a></li>
           <li><a href="/index.html#contact">Contact</a></li>
         </ul>
       </div>
