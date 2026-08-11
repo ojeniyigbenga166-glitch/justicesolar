@@ -81,7 +81,7 @@ function createSuccessSection() {
         </div>
 
         <p class="order-success__contact">
-          Questions? Call us at <a href="tel:08147574404"><strong>08147574404</strong></a> or
+          Questions? Call us at <a href="tel:07037971175"><strong>07037971175</strong></a> or
           <a href="mailto:Justicegeorgenes2@gmail.com">email us</a>.
         </p>
       </div>

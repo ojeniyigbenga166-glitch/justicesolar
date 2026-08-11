@@ -341,7 +341,7 @@ async function handleSubmit(e) {
   ].filter(Boolean).join('\n');
 
   // WhatsApp redirect
-  const waNumber = '2348147574404'; // 08147574404 in international format
+  const waNumber = '2347037971175'; // 07037971175 in international format
   const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(msg)}`;
 
   // Clear cart then redirect to success page

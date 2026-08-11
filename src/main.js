@@ -24,7 +24,7 @@ function createNavbar() {
         </div>
         <div class="contact-block">
           <div class="contact-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></div>
-          <div class="contact-text"><span>Call us anytime</span><small>08147574404</small></div>
+          <div class="contact-text"><span>Call us anytime</span><small>07037971175</small></div>
         </div>
         <div class="contact-block">
           <div class="contact-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></div>
@@ -862,8 +862,8 @@ function createMapSection() {
   section.id = 'locations';
 
   const akureMap = "https://maps.google.com/maps?q=JUSTICE+GEORGENES+SOLAR+CONSULTS,+Akure,+Ondo+State&t=&z=16&ie=UTF8&iwloc=B&output=embed";
-  const ondoMap = "https://maps.google.com/maps?q=Yaba+Street,+Ondo+City,+Ondo+State,+Nigeria&t=&z=14&ie=UTF8&iwloc=&output=embed";
-  const ekitiMap = "https://maps.google.com/maps?q=Fajuyi+Road,+Ado+Ekiti,+Ekiti+State,+Nigeria&t=&z=14&ie=UTF8&iwloc=&output=embed";
+  const ondoMap = "https://maps.google.com/maps?q=SHOP+5%269,+POWA+SHOPPING+COMPLEX+BESIDE+YABA+POLICE+STATION+ONDO,+ONDO+STATE&t=&z=14&ie=UTF8&iwloc=&output=embed";
+  const ekitiMap = "https://maps.google.com/maps?q=NO+2,+ODO-AREMU,+EREGURU+STREET,+ADO+EKITI,+EKITI+STATE.&t=&z=14&ie=UTF8&iwloc=&output=embed";
 
   section.innerHTML = `
     <div class="locations__container">
@@ -899,7 +899,7 @@ function createMapSection() {
             </div>
             <div class="branch-card__info">
               <h3 class="branch-card__title">Ondo Town Branch</h3>
-              <p class="branch-card__text"><strong>Address:</strong> 45 Yaba Street, Ondo City, Ondo State</p>
+              <p class="branch-card__text"><strong>Address:</strong> SHOP 5&9, POWA SHOPPING COMPLEX BESIDE YABA POLICE STATION ONDO, ONDO STATE.</p>
               <p class="branch-card__text"><strong>Support:</strong> +234 800 123 4568</p>
             </div>
           </div>
@@ -910,7 +910,7 @@ function createMapSection() {
             </div>
             <div class="branch-card__info">
               <h3 class="branch-card__title">Ado Ekiti Branch</h3>
-              <p class="branch-card__text"><strong>Address:</strong> 88 Fajuyi Road, Ado Ekiti, Ekiti State</p>
+              <p class="branch-card__text"><strong>Address:</strong> NO 2, ODO-AREMU, EREGURU STREET, ADO EKITI, EKITI STATE.</p>
               <p class="branch-card__text"><strong>Support:</strong> +234 800 123 4569</p>
             </div>
           </div>
@@ -1021,7 +1021,7 @@ function createFooter() {
         <div class="footer__col contact-col">
           <h4>Contact Us</h4>
           <ul>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent)"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> <span>08147574404</span></li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent)"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> <span>07037971175</span></li>
             <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent)"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> <span>Justicegeorgenes2@gmail.com</span></li>
             <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-accent); flex-shrink: 0;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> <span>SUITES 162 CASHHOLD ARAKALE ROAD,<br/>AKURE ONDO STATE</span></li>
           </ul>
