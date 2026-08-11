@@ -217,7 +217,7 @@ function createCheckoutSection() {
                     <input type="radio" name="delivery-method" value="${opt.id}" ${i===0?'checked':''} />
                     <div class="delivery-option__info">
                       <span>${opt.label}</span>
-                      ${opt.id === 'pickup' ? '<small>Suites 162 Cashhold Arakale Road, Akure</small>' : ''}
+                      ${opt.id === 'pickup' ? '<small>Suite 1&2 Cash-hold Complex, Ondo Rd, off Arakale Road Akure 340106, Ondo.</small>' : ''}
                       ${opt.id === 'local' ? '<small>2–3 business days within Ondo State</small>' : ''}
                       ${opt.id === 'nationwide' ? '<small>5–7 business days across Nigeria</small>' : ''}
                     </div>
