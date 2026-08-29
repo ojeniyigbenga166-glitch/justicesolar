@@ -149,7 +149,7 @@ function createCheckoutSection() {
           <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.25"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
           <h2>Your cart is empty</h2>
           <p>Add some products before checking out.</p>
-          <a href="/shop.html" class="btn-primary" style="display:inline-block;margin-top:1.5rem">Browse Products</a>
+          <a href="/shop" class="btn-primary" style="display:inline-block;margin-top:1.5rem">Browse Products</a>
         </div>
       ` : `
         <div class="checkout-layout">
@@ -347,7 +347,7 @@ async function handleSubmit(e) {
   // Clear cart then redirect to success page
   clearCart();
   window.open(waUrl, '_blank');
-  window.location.href = '/shop/order-success.html';
+  window.location.href = '/shop/order-success';
 }
 
 // ─── INIT ─────────────────────────────────────────────────────────────────────

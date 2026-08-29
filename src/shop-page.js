@@ -27,7 +27,7 @@ function renderCartDrawer() {
       <div class="cart-drawer__empty">
         <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.3"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
         <p>Your cart is empty</p>
-        <a href="/shop.html" class="btn-primary" style="margin-top:1rem;display:inline-block;text-align:center">Browse Products</a>
+        <a href="/shop" class="btn-primary" style="margin-top:1rem;display:inline-block;text-align:center">Browse Products</a>
       </div>`;
     footer.innerHTML = '';
     return;
@@ -58,15 +58,15 @@ function renderCartDrawer() {
       <strong>${formatPrice(subtotal)}</strong>
     </div>
     <p class="cart-drawer__note">Shipping and delivery fees calculated at checkout</p>
-    <a href="/shop/cart.html" class="btn-outline-dark" style="display:block;text-align:center;margin-bottom:0.75rem">View Cart</a>
-    <a href="/shop/checkout.html" class="btn-primary" style="display:block;text-align:center">Proceed to Checkout</a>
+    <a href="/shop/cart" class="btn-outline-dark" style="display:block;text-align:center;margin-bottom:0.75rem">View Cart</a>
+    <a href="/shop/checkout" class="btn-primary" style="display:block;text-align:center">Proceed to Checkout</a>
   `;
 
   // Quantity & remove handlers
   body.querySelectorAll('.qty-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      const id = btn.dataset.id;
-      const item = getCartItems().find(i => String(i.id) === id);
+      const id = parseInt(btn.dataset.id);
+      const item = getCartItems().find(i => i.id === id);
       if (!item) return;
       if (btn.dataset.action === 'inc') {
         updateQuantity(id, item.quantity + 1);
@@ -84,7 +84,7 @@ function renderCartDrawer() {
 
   body.querySelectorAll('.cart-item__remove').forEach(btn => {
     btn.addEventListener('click', () => {
-      removeFromCart(btn.dataset.id);
+      removeFromCart(parseInt(btn.dataset.id));
       renderCartDrawer();
       updateCartBadge(getCartCount());
     });
@@ -165,7 +165,7 @@ function buildCard(product) {
       <div class="shop-card__footer">
         <span class="shop-card__price">${formatPrice(product.price)}</span>
         <div class="shop-card__actions">
-          <a href="/shop/product.html?slug=${product.slug}" class="btn-outline-sm" aria-label="View details for ${product.name}">Details</a>
+          <a href="/shop/product?slug=${product.slug}" class="btn-outline-sm" aria-label="View details for ${product.name}">Details</a>
           <button
             class="btn-primary shop-card__add-btn"
             data-id="${product.id}"
@@ -265,8 +265,8 @@ function resetFilters() {
 
 // ─── ADD TO CART HANDLER ─────────────────────────────────────────────────────
 function handleAddToCart(btn) {
-  const id = btn.dataset.id;
-  const product = products.find(p => String(p.id) === id);
+  const id = parseInt(btn.dataset.id);
+  const product = products.find(p => p.id === id);
   if (!product) return;
 
   addToCart(product, 1);
@@ -307,10 +307,10 @@ function buildFilterButtons() {
   });
 
   // Rebuild — keep the "All Products" button then append one per category
-  filterBar.innerHTML = `<button class="filter-btn ${activeFilter === 'all' ? 'active' : ''}" data-filter="all">All Products</button>`;
+  filterBar.innerHTML = `<button class="filter-btn active" data-filter="all">All Products</button>`;
   categories.forEach(cat => {
     const btn = document.createElement('button');
-    btn.className = `filter-btn ${activeFilter === cat ? 'active' : ''}`;
+    btn.className = 'filter-btn';
     btn.dataset.filter = cat;
     btn.textContent = cat;
     filterBar.appendChild(btn);
@@ -323,15 +323,6 @@ function buildFilterButtons() {
       btn.classList.add('active');
       activeFilter = btn.dataset.filter;
       renderProducts();
-
-      // Update URL query param without reloading
-      const url = new URL(window.location.href);
-      if (activeFilter === 'all') {
-        url.searchParams.delete('category');
-      } else {
-        url.searchParams.set('category', activeFilter);
-      }
-      window.history.pushState({}, '', url);
     });
   });
 }
@@ -347,13 +338,6 @@ async function init() {
 
   // Fetch dynamic products from Supabase
   await fetchProducts();
-
-  // Read URL query parameter for category before building filter buttons
-  const params = new URLSearchParams(window.location.search);
-  const catParam = params.get('category');
-  if (catParam) {
-    activeFilter = catParam;
-  }
 
   // Build category filter buttons from whatever categories exist in the data
   buildFilterButtons();

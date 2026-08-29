@@ -16,7 +16,7 @@ function createSuccessSection() {
   main.className = 'order-success-page';
   main.innerHTML = `
     <div class="order-success__container">
-      <a href="/shop.html" class="page-back-btn" style="margin-bottom: 1.5rem;">
+      <a href="/shop" class="page-back-btn" style="margin-bottom: 1.5rem;">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
         <span>Back to Shop</span>
       </a>
@@ -73,11 +73,11 @@ function createSuccessSection() {
         </div>
 
         <div class="order-success__actions">
-          <a href="/shop.html" class="btn-primary" id="continue-shopping-btn">
+          <a href="/shop" class="btn-primary" id="continue-shopping-btn">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
             Continue Shopping
           </a>
-          <a href="/index.html#contact" class="btn-outline-sm">Contact Us</a>
+          <a href="/#contact" class="btn-outline-sm">Contact Us</a>
         </div>
 
         <p class="order-success__contact">

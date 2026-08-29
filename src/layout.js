@@ -16,7 +16,7 @@ export function createNavbar(activePage = '') {
     <div class="navbar-top desktop-only">
       <div class="navbar-top__left">
         <div class="navbar__logo" id="logo-home">
-          <a href="/index.html"><img src="/icon.svg" alt="Justice Georgenes Solar Consults" class="navbar__logo-img" /></a>
+          <a href="/"><img src="/icon.svg" alt="Justice Georgenes Solar Consults" class="navbar__logo-img" /></a>
         </div>
       </div>
       <div class="navbar-top__right">
@@ -45,37 +45,37 @@ export function createNavbar(activePage = '') {
         
         <!-- Mobile Logo -->
         <div class="navbar__logo mobile-only">
-          <a href="/index.html"><img src="/icon.svg" alt="Justice Georgenes Solar Consults" class="navbar__logo-img" style="height:40px;" /></a>
+          <a href="/"><img src="/icon.svg" alt="Justice Georgenes Solar Consults" class="navbar__logo-img" style="height:40px;" /></a>
         </div>
 
         <!-- Desktop Nav Links -->
         <ul class="navbar__links">
-          <li><a href="/index.html#home">Home</a></li>
+          <li><a href="/#home">Home</a></li>
           <li class="company-menu">
             <a href="javascript:void(0)" class="navbar__menu-link">Company <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
             <ul class="company-dropdown">
-              <li><a href="/index.html#about">About Us</a></li>
-              <li><a href="/index.html#locations">Our Branches</a></li>
-              <li><a href="/index.html#how-it-works">Why Choose Us</a></li>
-              <li><a href="/index.html#testimonials">Testimonials</a></li>
+              <li><a href="/#about">About Us</a></li>
+              <li><a href="/#locations">Our Branches</a></li>
+              <li><a href="/#how-it-works">Why Choose Us</a></li>
+              <li><a href="/#testimonials">Testimonials</a></li>
             </ul>
           </li>
           <li class="services-menu">
-            <a href="/services.html" class="navbar__menu-link ${activePage === 'services' ? 'active' : ''}">Services <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
+            <a href="/services" class="navbar__menu-link ${activePage === 'services' ? 'active' : ''}">Services <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
             <ul class="services-dropdown">
-              <li><a href="/services.html?service=product">Product</a></li>
-              <li><a href="/services.html?service=residential">Residential solar solution</a></li>
-              <li><a href="/services.html?service=industrial">Industrial solar solution</a></li>
-              <li><a href="/services.html?service=installment">installment plan</a></li>
-              <li><a href="/services.html?service=audits">Comprehensive Site Audits</a></li>
-              <li><a href="/services.html?service=installation">Professional Installation</a></li>
-              <li><a href="/services.html?service=maintenance">Maintenance &amp; Support</a></li>
-              <li><a href="/services.html?service=training">Solar Training Program</a></li>
+              <li><a href="/services?service=product">Product</a></li>
+              <li><a href="/services?service=residential">Residential solar solution</a></li>
+              <li><a href="/services?service=industrial">Industrial solar solution</a></li>
+              <li><a href="/services?service=installment">installment plan</a></li>
+              <li><a href="/services?service=audits">Comprehensive Site Audits</a></li>
+              <li><a href="/services?service=installation">Professional Installation</a></li>
+              <li><a href="/services?service=maintenance">Maintenance &amp; Support</a></li>
+              <li><a href="/services?service=training">Solar Training Program</a></li>
             </ul>
           </li>
-          <li><a href="/projects.html" class="navbar__menu-link ${activePage === 'projects' ? 'active' : ''}">Projects</a></li>
-          <li><a href="/shop.html" class="navbar__menu-link ${activePage === 'shop' ? 'active' : ''}">Shop</a></li>
-          <li><a href="/index.html#contact">Contact</a></li>
+          <li><a href="/projects" class="navbar__menu-link ${activePage === 'projects' ? 'active' : ''}">Projects</a></li>
+          <li><a href="/shop" class="navbar__menu-link ${activePage === 'shop' ? 'active' : ''}">Shop</a></li>
+          <li><a href="/#contact">Contact</a></li>
         </ul>
       </div>
 
@@ -99,7 +99,7 @@ export function createMobileMenu() {
   menu.className = 'navbar__mobile';
   menu.id = 'mobile-menu';
   menu.innerHTML = `
-    <a href="/index.html#home">Home</a>
+    <a href="/#home">Home</a>
     
     <!-- Company Collapsible -->
     <div class="mobile-sections-menu">
@@ -107,10 +107,10 @@ export function createMobileMenu() {
         Company <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 6px; transition: transform 0.3s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
       </button>
       <div class="mobile-submenu" id="mobile-company-submenu">
-        <a href="/index.html#about" class="mobile-submenu-link">About Us</a>
-        <a href="/index.html#locations" class="mobile-submenu-link">Our Branches</a>
-        <a href="/index.html#how-it-works" class="mobile-submenu-link">Why Choose Us</a>
-        <a href="/index.html#testimonials" class="mobile-submenu-link">Testimonials</a>
+        <a href="/#about" class="mobile-submenu-link">About Us</a>
+        <a href="/#locations" class="mobile-submenu-link">Our Branches</a>
+        <a href="/#how-it-works" class="mobile-submenu-link">Why Choose Us</a>
+        <a href="/#testimonials" class="mobile-submenu-link">Testimonials</a>
       </div>
     </div>
 
@@ -120,20 +120,20 @@ export function createMobileMenu() {
         Services <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 6px; transition: transform 0.3s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
       </button>
       <div class="mobile-submenu" id="mobile-services-submenu">
-        <a href="/services.html?service=product" class="mobile-submenu-link">Product</a>
-        <a href="/services.html?service=residential" class="mobile-submenu-link">Residential Solar Solution</a>
-        <a href="/services.html?service=industrial" class="mobile-submenu-link">Industrial Solar Solution</a>
-        <a href="/services.html?service=installment" class="mobile-submenu-link">installment plan</a>
-        <a href="/services.html?service=audits" class="mobile-submenu-link">Comprehensive Site Audits</a>
-        <a href="/services.html?service=installation" class="mobile-submenu-link">Professional Installation</a>
-        <a href="/services.html?service=maintenance" class="mobile-submenu-link">Maintenance &amp; Support</a>
-        <a href="/services.html?service=training" class="mobile-submenu-link">Solar Training Program</a>
+        <a href="/services?service=product" class="mobile-submenu-link">Product</a>
+        <a href="/services?service=residential" class="mobile-submenu-link">Residential Solar Solution</a>
+        <a href="/services?service=industrial" class="mobile-submenu-link">Industrial Solar Solution</a>
+        <a href="/services?service=installment" class="mobile-submenu-link">installment plan</a>
+        <a href="/services?service=audits" class="mobile-submenu-link">Comprehensive Site Audits</a>
+        <a href="/services?service=installation" class="mobile-submenu-link">Professional Installation</a>
+        <a href="/services?service=maintenance" class="mobile-submenu-link">Maintenance &amp; Support</a>
+        <a href="/services?service=training" class="mobile-submenu-link">Solar Training Program</a>
       </div>
     </div>
 
-    <a href="/projects.html">Projects</a>
-    <a href="/shop.html">Shop</a>
-    <a href="/index.html#contact">Contact</a>
+    <a href="/projects">Projects</a>
+    <a href="/shop">Shop</a>
+    <a href="/#contact">Contact</a>
     <button class="btn-cta" id="mob-cta" style="margin-top:0.5rem;width:fit-content">Get Started</button>
   `;
   return menu;
@@ -184,12 +184,12 @@ export function createFooter() {
         <div class="footer__col">
           <h4>Quick Links</h4>
           <ul>
-            <li><a href="/index.html#home">Home</a></li>
-            <li><a href="/index.html#about">About Us</a></li>
-            <li><a href="/services.html">Services</a></li>
-            <li><a href="/projects.html">Projects</a></li>
-            <li><a href="/shop.html">Shop</a></li>
-            <li><a href="/index.html#contact">Contact Us</a></li>
+            <li><a href="/#home">Home</a></li>
+            <li><a href="/#about">About Us</a></li>
+            <li><a href="/services">Services</a></li>
+            <li><a href="/projects">Projects</a></li>
+            <li><a href="/shop">Shop</a></li>
+            <li><a href="/#contact">Contact Us</a></li>
           </ul>
         </div>
 

@@ -57,25 +57,25 @@ function createNavbar() {
             </ul>
           </li>
           <li class="services-menu">
-            <a href="/services.html" id="nav-services" style="display:flex;align-items:center;gap:4px;">Services <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
+            <a href="/services" id="nav-services" style="display:flex;align-items:center;gap:4px;">Services <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
             <ul class="services-dropdown">
-              <li><a href="/services.html?service=product">Product</a></li>
-              <li><a href="/services.html?service=residential">Residential solar solution</a></li>
-              <li><a href="/services.html?service=industrial">Industrial solar solution</a></li>
-              <li><a href="/services.html?service=installment">installment plan</a></li>
-              <li><a href="/services.html?service=audits">Comprehensive Site Audits</a></li>
-              <li><a href="/services.html?service=installation">Professional Installation</a></li>
-              <li><a href="/services.html?service=maintenance">Maintenance &amp; Support</a></li>
-              <li><a href="/services.html?service=training">Solar Training Program</a></li>
+              <li><a href="/services?service=product">Product</a></li>
+              <li><a href="/services?service=residential">Residential solar solution</a></li>
+              <li><a href="/services?service=industrial">Industrial solar solution</a></li>
+              <li><a href="/services?service=installment">installment plan</a></li>
+              <li><a href="/services?service=audits">Comprehensive Site Audits</a></li>
+              <li><a href="/services?service=installation">Professional Installation</a></li>
+              <li><a href="/services?service=maintenance">Maintenance &amp; Support</a></li>
+              <li><a href="/services?service=training">Solar Training Program</a></li>
             </ul>
           </li>
-          <li><a href="/projects.html" id="nav-projects">Projects</a></li>
-          <li><a href="/shop.html" id="nav-shop">Shop</a></li>
+          <li><a href="/projects" id="nav-projects">Projects</a></li>
+          <li><a href="/shop" id="nav-shop">Shop</a></li>
           <li><a href="#contact" id="nav-contact">Contact</a></li>
         </ul>
       </div>
       <div class="navbar-bottom__right">
-        <a href="/shop.html" class="navbar__cart" id="nav-cart" aria-label="Shopping cart">
+        <a href="/shop" class="navbar__cart" id="nav-cart" aria-label="Shopping cart">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
           <span class="navbar__cart-badge" id="cart-badge">0</span>
         </a>
@@ -113,19 +113,19 @@ function createMobileMenu() {
         Services <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 6px; transition: transform 0.3s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
       </button>
       <div class="mobile-submenu" id="mobile-services-submenu">
-        <a href="/services.html?service=product" class="mobile-submenu-link">Product</a>
-        <a href="/services.html?service=residential" class="mobile-submenu-link">Residential Solar Solution</a>
-        <a href="/services.html?service=industrial" class="mobile-submenu-link">Industrial Solar Solution</a>
-        <a href="/services.html?service=installment" class="mobile-submenu-link">installment plan</a>
-        <a href="/services.html?service=audits" class="mobile-submenu-link">Comprehensive Site Audits</a>
-        <a href="/services.html?service=installation" class="mobile-submenu-link">Professional Installation</a>
-        <a href="/services.html?service=maintenance" class="mobile-submenu-link">Maintenance &amp; Support</a>
-        <a href="/services.html?service=training" class="mobile-submenu-link">Solar Training Program</a>
+        <a href="/services?service=product" class="mobile-submenu-link">Product</a>
+        <a href="/services?service=residential" class="mobile-submenu-link">Residential Solar Solution</a>
+        <a href="/services?service=industrial" class="mobile-submenu-link">Industrial Solar Solution</a>
+        <a href="/services?service=installment" class="mobile-submenu-link">installment plan</a>
+        <a href="/services?service=audits" class="mobile-submenu-link">Comprehensive Site Audits</a>
+        <a href="/services?service=installation" class="mobile-submenu-link">Professional Installation</a>
+        <a href="/services?service=maintenance" class="mobile-submenu-link">Maintenance &amp; Support</a>
+        <a href="/services?service=training" class="mobile-submenu-link">Solar Training Program</a>
       </div>
     </div>
 
-    <a href="/projects.html" id="mob-projects">Projects</a>
-    <a href="/shop.html" id="mob-shop">Shop</a>
+    <a href="/projects" id="mob-projects">Projects</a>
+    <a href="/shop" id="mob-shop">Shop</a>
     <a href="#contact" id="mob-contact">Contact</a>
     <button class="btn-cta" id="mob-cta" style="margin-top:0.5rem;width:fit-content">Get Started</button>
   `;
@@ -226,7 +226,7 @@ function createAboutUs() {
           With over a decade of hands-on experience, we pride ourselves on our meticulous approach—from comprehensive site audits to professional installation and ongoing maintenance. Our goal is to make clean, affordable energy accessible to everyone, ensuring a greener, more sustainable future.
         </p>
         
-        <button class="btn-primary about__btn" onclick="window.location.href='/services.html'">Our Services</button>
+        <button class="btn-primary about__btn" onclick="window.location.href='/services'">Our Services</button>
       </div>
     </div>
   `;
@@ -415,7 +415,7 @@ function createProducts() {
 
       <!-- Browse All CTA Button -->
       <div class="products__actions">
-        <a href="/shop.html" class="btn-primary">
+        <a href="/shop" class="btn-primary">
           Browse All Products
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 6px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
@@ -990,8 +990,8 @@ function createFooter() {
           <ul>
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About Us</a></li>
-            <li><a href="/services.html">Services</a></li>
-            <li><a href="/projects.html">Projects</a></li>
+            <li><a href="/services">Services</a></li>
+            <li><a href="/projects">Projects</a></li>
             <li><a href="#contact">Contact Us</a></li>
           </ul>
         </div>
@@ -1557,7 +1557,7 @@ async function initProductsCarousel() {
         <p class="carousel-product-desc">${p.shortDescription || ''}</p>
         <div class="carousel-product-footer">
           <span class="carousel-product-price">₦${p.price.toLocaleString()}</span>
-          <a href="/shop/product.html?slug=${p.slug}" class="carousel-product-link">
+          <a href="/shop/product?slug=${p.slug}" class="carousel-product-link">
             View Details
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>

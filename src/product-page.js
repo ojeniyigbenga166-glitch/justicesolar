@@ -19,7 +19,7 @@ function renderCartDrawer() {
   const items = getCartItems();
 
   if (items.length === 0) {
-    body.innerHTML = `<div class="cart-drawer__empty"><svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.3"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg><p>Your cart is empty</p><a href="/shop.html" class="btn-primary" style="margin-top:1rem;display:inline-block;text-align:center">Browse Products</a></div>`;
+    body.innerHTML = `<div class="cart-drawer__empty"><svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.3"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg><p>Your cart is empty</p><a href="/shop" class="btn-primary" style="margin-top:1rem;display:inline-block;text-align:center">Browse Products</a></div>`;
     footer.innerHTML = '';
     return;
   }
@@ -45,14 +45,14 @@ function renderCartDrawer() {
   footer.innerHTML = `
     <div class="cart-drawer__subtotal"><span>Subtotal</span><strong>${formatPrice(getCartTotal())}</strong></div>
     <p class="cart-drawer__note">Shipping calculated at checkout</p>
-    <a href="/shop/cart.html" class="btn-outline-dark" style="display:block;text-align:center;margin-bottom:0.75rem">View Cart</a>
-    <a href="/shop/checkout.html" class="btn-primary" style="display:block;text-align:center">Proceed to Checkout</a>
+    <a href="/shop/cart" class="btn-outline-dark" style="display:block;text-align:center;margin-bottom:0.75rem">View Cart</a>
+    <a href="/shop/checkout" class="btn-primary" style="display:block;text-align:center">Proceed to Checkout</a>
   `;
 
   body.querySelectorAll('.qty-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      const id = btn.dataset.id;
-      const item = getCartItems().find(i => String(i.id) === id);
+      const id = parseInt(btn.dataset.id);
+      const item = getCartItems().find(i => i.id === id);
       if (!item) return;
       btn.dataset.action === 'inc' ? updateQuantity(id, item.quantity + 1) : (item.quantity <= 1 ? removeFromCart(id) : updateQuantity(id, item.quantity - 1));
       renderCartDrawer();
@@ -62,7 +62,7 @@ function renderCartDrawer() {
 
   body.querySelectorAll('.cart-item__remove').forEach(btn => {
     btn.addEventListener('click', () => {
-      removeFromCart(btn.dataset.id);
+      removeFromCart(parseInt(btn.dataset.id));
       renderCartDrawer();
       updateCartBadge(getCartCount());
     });
@@ -93,16 +93,16 @@ function buildProductPage(product) {
   `).join('');
 
   main.innerHTML = `
-    <div class="product-detail__container subpage-container">
+    <div class="product-detail__container">
 
       <!-- Breadcrumb -->
       <nav class="breadcrumb" aria-label="Breadcrumb">
         <a href="javascript:history.back()" class="page-back-btn" style="margin-bottom:0; margin-right: 1rem;" aria-label="Go back">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
         </a>
-        <a href="/shop.html">Shop</a>
+        <a href="/shop">Shop</a>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-        <a href="/shop.html?category=${encodeURIComponent(product.category)}">${product.category}</a>
+        <a href="/shop?category=${encodeURIComponent(product.category)}">${product.category}</a>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
         <span>${product.name}</span>
       </nav>
@@ -154,7 +154,7 @@ function buildProductPage(product) {
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
               ${inStock ? 'Add to Cart' : 'Out of Stock'}
             </button>
-            <a href="/shop/checkout.html" class="btn-cta-yellow product-info__buy-btn" ${!inStock ? 'style="pointer-events:none;opacity:0.5"' : ''}>
+            <a href="/shop/checkout" class="btn-cta-yellow product-info__buy-btn" ${!inStock ? 'style="pointer-events:none;opacity:0.5"' : ''}>
               Buy Now
             </a>
           </div>
@@ -250,7 +250,7 @@ function renderRelated(product) {
   }
 
   grid.innerHTML = related.map(p => `
-    <a href="/shop/product.html?slug=${p.slug}" class="related-card">
+    <a href="/shop/product?slug=${p.slug}" class="related-card">
       <div class="related-card__img-wrap">
         <img src="${p.image}" alt="${p.name}" loading="lazy"
           onerror="this.src='https://placehold.co/300x200/e2e8f0/475569?text=Product'" />
@@ -286,7 +286,7 @@ async function init() {
         <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.25" style="margin:0 auto 1.5rem"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         <h1 style="font-family:var(--font-heading);font-size:2rem;color:var(--color-text-heading);margin-bottom:1rem">Product Not Found</h1>
         <p style="margin-bottom:2rem">The product you're looking for doesn't exist or may have been removed.</p>
-        <a href="/shop.html" class="btn-primary" style="display:inline-block">Back to Shop</a>
+        <a href="/shop" class="btn-primary" style="display:inline-block">Back to Shop</a>
       </div>
     `;
     app.appendChild(notFound);

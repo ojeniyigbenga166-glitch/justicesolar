@@ -424,7 +424,7 @@ async function init() {
 
   // Initialize navbar behaviors (mobile submenus, scroll effect, modal bindings)
   initNavbar(() => {
-    window.location.href = '/shop/cart.html';
+    window.location.href = '/shop/cart';
   });
 
   // --- Portfolio Navigation ---

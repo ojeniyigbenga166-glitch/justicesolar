@@ -33,7 +33,7 @@ function renderCart() {
         <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.25"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
         <h2>Your cart is empty</h2>
         <p>Looks like you haven't added anything yet.</p>
-        <a href="/shop.html" class="btn-primary" style="display:inline-block;margin-top:1.5rem">Browse Products</a>
+        <a href="/shop" class="btn-primary" style="display:inline-block;margin-top:1.5rem">Browse Products</a>
       </div>
     `;
     return;
@@ -60,7 +60,7 @@ function renderCart() {
               <img src="${item.image}" alt="${item.name}"
                 onerror="this.src='https://placehold.co/80x64/e2e8f0/475569?text=Product'" />
               <div>
-                <a href="/shop/product.html?slug=${item.slug}" class="cart-row__name">${item.name}</a>
+                <a href="/shop/product?slug=${item.slug}" class="cart-row__name">${item.name}</a>
                 <p class="cart-row__cat">${item.category}</p>
               </div>
             </div>
@@ -78,7 +78,7 @@ function renderCart() {
         `).join('')}
 
         <div class="cart-page__actions-row">
-          <a href="/shop.html" class="btn-outline-sm">
+          <a href="/shop" class="btn-outline-sm">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
             Continue Shopping
           </a>
@@ -118,7 +118,7 @@ function renderCart() {
           <strong>${formatPrice(total)}</strong>
         </div>
 
-        <a href="/shop/checkout.html" class="btn-primary" style="display:block;text-align:center;margin-top:1.5rem">
+        <a href="/shop/checkout" class="btn-primary" style="display:block;text-align:center;margin-top:1.5rem">
           Proceed to Checkout
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
         </a>
@@ -133,8 +133,8 @@ function renderCart() {
   // Qty controls
   wrapper.querySelectorAll('.qty-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      const id = btn.dataset.id;
-      const item = getCartItems().find(i => String(i.id) === id);
+      const id = parseInt(btn.dataset.id);
+      const item = getCartItems().find(i => i.id === id);
       if (!item) return;
       btn.dataset.action === 'inc'
         ? updateQuantity(id, item.quantity + 1)
@@ -147,7 +147,7 @@ function renderCart() {
   // Remove
   wrapper.querySelectorAll('.cart-row__remove').forEach(btn => {
     btn.addEventListener('click', () => {
-      removeFromCart(btn.dataset.id);
+      removeFromCart(parseInt(btn.dataset.id));
       renderCart();
       updateCartBadge(getCartCount());
     });
