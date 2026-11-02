@@ -1,6 +1,7 @@
 import './style.css';
 import { supabase } from './supabase.js';
 import { products, fetchProducts } from './products.js';
+import { createSolarPackages, initSolarPackages } from './packages.js';
 
 // ==============================
 // NAVBAR Component
@@ -321,8 +322,8 @@ function createHowItWorks() {
       <!-- Left side: Text -->
       <div class="hiw__content">
         <p class="section-label" style="color: var(--color-primary);">HOW IT WORKS</p>
-        <h2 class="hiw__title">Simple Steps to Solar Savings</h2>
-        <p class="hiw__desc">We make going solar easy from start to finish.</p>
+        <h2 class="hiw__title">From Design to<br>Solar Power</h2>
+        <p class="hiw__desc">We take your solar project from engineering through procurement to commissioning.</p>
         <button class="btn-primary hiw__btn" id="hiw-get-started">Get Started</button>
       </div>
 
@@ -332,47 +333,68 @@ function createHowItWorks() {
         <!-- Step 1 -->
         <div class="hiw__step">
           <div class="hiw__icon-wrap">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><path d="M8 10h.01"></path><path d="M12 10h.01"></path><path d="M16 10h.01"></path></svg>
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              <line x1="8" y1="10" x2="8.01" y2="10" stroke-width="3"></line>
+              <line x1="12" y1="10" x2="12.01" y2="10" stroke-width="3"></line>
+              <line x1="16" y1="10" x2="16.01" y2="10" stroke-width="3"></line>
+            </svg>
             <div class="hiw__badge">1</div>
           </div>
-          <h3 class="hiw__step-title">Free Consultation</h3>
-          <p class="hiw__step-desc">We discuss your energy needs and goals.</p>
+          <h3 class="hiw__step-title">Engineering</h3>
+          <p class="hiw__step-desc">We assess your site and engineer a solar system tailored to your energy needs.</p>
         </div>
 
-        <div class="hiw__connector"></div>
+        <!-- Connector with arrow: 1 to 2 -->
+        <div class="hiw__connector" aria-hidden="true">
+          <span class="hiw__connector-line"></span>
+          <span class="hiw__connector-arrow">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </span>
+          <span class="hiw__connector-line"></span>
+        </div>
 
         <!-- Step 2 -->
         <div class="hiw__step">
           <div class="hiw__icon-wrap">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><circle cx="10" cy="13" r="2"></circle><path d="m14 17-2.5-2.5"></path></svg>
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m7.5 4.27 9 5.15"></path>
+              <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"></path>
+              <path d="m3.3 7 8.7 5 8.7-5"></path>
+              <path d="M12 22V12"></path>
+            </svg>
             <div class="hiw__badge">2</div>
           </div>
-          <h3 class="hiw__step-title">Site Inspection</h3>
-          <p class="hiw__step-desc">We analyze your roof and design the best system.</p>
+          <h3 class="hiw__step-title">Procurement</h3>
+          <p class="hiw__step-desc">We source quality panels, inverters, and components for your approved design.</p>
         </div>
 
-        <div class="hiw__connector"></div>
+        <!-- Connector with arrow: 2 to 3 -->
+        <div class="hiw__connector" aria-hidden="true">
+          <span class="hiw__connector-line"></span>
+          <span class="hiw__connector-arrow">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </span>
+          <span class="hiw__connector-line"></span>
+        </div>
 
         <!-- Step 3 -->
         <div class="hiw__step">
           <div class="hiw__icon-wrap">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect><line x1="3" x2="21" y1="9" y2="9"></line><line x1="3" x2="21" y1="15" y2="15"></line><line x1="9" x2="9" y1="3" y2="21"></line><line x1="15" x2="15" y1="3" y2="21"></line></svg>
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
             <div class="hiw__badge">3</div>
           </div>
-          <h3 class="hiw__step-title">Professional Installation</h3>
-          <p class="hiw__step-desc">Our experts install your system with care.</p>
-        </div>
-
-        <div class="hiw__connector"></div>
-
-        <!-- Step 4 -->
-        <div class="hiw__step">
-          <div class="hiw__icon-wrap">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-            <div class="hiw__badge">4</div>
-          </div>
-          <h3 class="hiw__step-title">Start Saving</h3>
-          <p class="hiw__step-desc">Generate clean energy and save on bills.</p>
+          <h3 class="hiw__step-title">Commissioning</h3>
+          <p class="hiw__step-desc">We install, test, and commission your system, ready to generate clean energy.</p>
         </div>
 
       </div>
@@ -1341,10 +1363,16 @@ function createGetStartedModal() {
   return modal;
 }
 
-function openGetStartedModal() {
+function openGetStartedModal(packageName) {
   const modal = createGetStartedModal();
   modal.classList.add('active');
   document.body.style.overflow = 'hidden';
+  if (typeof packageName === 'string' && packageName) {
+    const msg = document.getElementById('message');
+    if (msg) {
+      msg.value = `I would like to request a quotation and site assessment for the: ${packageName}.`;
+    }
+  }
 }
 
 function closeGetStartedModal() {
@@ -1368,6 +1396,7 @@ function init() {
   // const services = createServices(); // Moved to services.html
   const howItWorks = createHowItWorks();
   const products = createProducts();
+  const solarPackages = createSolarPackages();
   const calculator = createCalculator();
   const whyChooseUs = createWhyChooseUs();
   const testimonials = createTestimonials();
@@ -1381,6 +1410,7 @@ function init() {
   // app.appendChild(services); // Moved to services.html
   app.appendChild(howItWorks);
   app.appendChild(products);
+  app.appendChild(solarPackages);
   app.appendChild(calculator);
   app.appendChild(whyChooseUs);
   app.appendChild(testimonials);
@@ -1527,6 +1557,7 @@ function init() {
   }
   updateCartBadge();
   initProductsCarousel();
+  initSolarPackages(openGetStartedModal);
 }
 
 async function initProductsCarousel() {

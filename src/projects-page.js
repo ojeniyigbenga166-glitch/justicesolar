@@ -6,6 +6,7 @@ import {
   initNavbar, updateCartBadge
 } from './layout.js';
 import { getCartCount } from './cart.js';
+import { createSolarPackages, initSolarPackages } from './packages.js';
 
 // Shared Layout Navbar/Mobile Menu imported from layout.js
 
@@ -415,17 +416,21 @@ async function init() {
   // ===== END DEBUG BLOCK =====
 
   const projects = createProjects();
+  const solarPackages = createSolarPackages();
   const footer = createFooter();
 
   app.appendChild(navbar);
   app.appendChild(mobileMenu);
   app.appendChild(projects);
+  app.appendChild(solarPackages);
   app.appendChild(footer);
 
   // Initialize navbar behaviors (mobile submenus, scroll effect, modal bindings)
   initNavbar(() => {
     window.location.href = '/shop/cart';
   });
+
+  initSolarPackages();
 
   // --- Portfolio Navigation ---
   const projectCategoryLinks = document.querySelectorAll('.project-category-link');
