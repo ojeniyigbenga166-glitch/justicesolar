@@ -3844,6 +3844,27 @@ img {
   line-height: 1;
 }
 
+.footer__logo-wrap {
+  background: var(--color-white);
+  padding: 6px 14px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  transition: var(--transition);
+}
+
+.footer__logo-wrap:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.footer__logo-img {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+}
+
 .footer__logo-text span {
   font-size: 0.65rem;
   color: var(--color-muted);

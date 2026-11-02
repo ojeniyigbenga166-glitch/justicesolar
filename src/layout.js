@@ -16,7 +16,7 @@ export function createNavbar(activePage = '') {
     <div class="navbar-top desktop-only">
       <div class="navbar-top__left">
         <div class="navbar__logo" id="logo-home">
-          <a href="/"><img src="/icon.svg" alt="Justice Georgenes Solar Consults" class="navbar__logo-img" /></a>
+          <a href="/"><img src="/logo.png" alt="Justice Georgenes Solar Consults" class="navbar__logo-img" /></a>
         </div>
       </div>
       <div class="navbar-top__right">
@@ -45,7 +45,7 @@ export function createNavbar(activePage = '') {
         
         <!-- Mobile Logo -->
         <div class="navbar__logo mobile-only">
-          <a href="/"><img src="/icon.svg" alt="Justice Georgenes Solar Consults" class="navbar__logo-img" style="height:40px;" /></a>
+          <a href="/"><img src="/logo.png" alt="Justice Georgenes Solar Consults" class="navbar__logo-img" style="height:44px;" /></a>
         </div>
 
         <!-- Desktop Nav Links -->
@@ -166,10 +166,8 @@ export function createFooter() {
       <div class="footer__container">
         <div class="footer__col brand-col">
           <div class="footer__logo">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="var(--color-primary)"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-            <div class="footer__logo-text">
-              <h3>Justice Georgenes</h3>
-              <span>Powering a Brighter Tomorrow</span>
+            <div class="footer__logo-wrap">
+              <img src="/logo.png" alt="Justice Georgenes Solar Consults" class="footer__logo-img" />
             </div>
           </div>
           <p class="footer__desc">We provide smart solar solutions for homes and businesses to save money and protect the planet.</p>

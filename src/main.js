@@ -15,7 +15,7 @@ function createNavbar() {
     <div class="navbar-top desktop-only">
       <div class="navbar-top__left">
         <div class="navbar__logo" id="logo-home">
-          <img src="/icon.svg" alt="Justice Georgenes Solar Consults" class="navbar__logo-img" />
+          <img src="/logo.png" alt="Justice Georgenes Solar Consults" class="navbar__logo-img" />
         </div>
       </div>
       <div class="navbar-top__right">
@@ -43,7 +43,7 @@ function createNavbar() {
         </div>
         <!-- Mobile Logo -->
         <div class="navbar__logo mobile-only" id="logo-home-mob">
-          <img src="/icon.svg" alt="Justice Georgenes Solar Consults" class="navbar__logo-img" style="height:40px;" />
+          <img src="/logo.png" alt="Justice Georgenes Solar Consults" class="navbar__logo-img" style="height:44px;" />
         </div>
         <!-- Desktop Nav Links -->
         <ul class="navbar__links">
@@ -991,10 +991,8 @@ function createFooter() {
         <!-- Brand Column -->
         <div class="footer__col brand-col">
           <div class="footer__logo">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="var(--color-primary)"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-            <div class="footer__logo-text">
-              <h3>Justice Georgenes</h3>
-              <span>Powering a Brighter Tomorrow</span>
+            <div class="footer__logo-wrap">
+              <img src="/logo.png" alt="Justice Georgenes Solar Consults" class="footer__logo-img" />
             </div>
           </div>
           <p class="footer__desc">We provide smart solar solutions for homes and businesses to save money and protect the planet.</p>
