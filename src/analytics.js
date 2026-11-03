@@ -3,12 +3,12 @@
  * Justice Georgenes Solar Consults
  */
 
-const GA_ID = import.meta.env.VITE_GA_MEASUREMENT_ID || '';
+const GA_ID = import.meta.env.VITE_GA_MEASUREMENT_ID || 'G-W0DZ43QGVN';
 let isInitialized = false;
 
 /**
  * Initialize Google Analytics 4
- * Automatically injects the gtag.js script if a measurement ID is configured.
+ * Automatically ensures gtag is initialized and avoids duplicate scripts.
  */
 export function initAnalytics() {
   if (isInitialized) return;
@@ -17,12 +17,15 @@ export function initAnalytics() {
 
   // Setup dataLayer regardless of whether ID is present yet
   window.dataLayer = window.dataLayer || [];
-  window.gtag = function () {
-    window.dataLayer.push(arguments);
-  };
+  if (!window.gtag) {
+    window.gtag = function () {
+      window.dataLayer.push(arguments);
+    };
+  }
 
-  if (GA_ID && GA_ID.startsWith('G-')) {
-    // Inject gtag.js script asynchronously
+  const existingScript = document.querySelector(`script[src*="googletagmanager.com/gtag/js"]`);
+  if (!existingScript && GA_ID && GA_ID.startsWith('G-')) {
+    // Inject gtag.js script asynchronously if not already present in HTML
     const script = document.createElement('script');
     script.async = true;
     script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
@@ -35,9 +38,6 @@ export function initAnalytics() {
     });
 
     console.info(`[Google Analytics] GA4 initialized with ID: ${GA_ID}`);
-  } else {
-    // Development / placeholder fallback
-    console.info('[Google Analytics] No VITE_GA_MEASUREMENT_ID detected in .env. Events will log to console in development mode.');
   }
 
   isInitialized = true;
