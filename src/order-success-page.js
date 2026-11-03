@@ -4,6 +4,7 @@
 // =============================================
 import './style.css';
 import { createNavbar, createMobileMenu, createFooter, initNavbar } from './layout.js';
+import { initAnalytics, trackPageView } from './analytics.js';
 
 function createSuccessSection() {
   const ref = sessionStorage.getItem('jg_order_ref') || 'JGS-' + Date.now().toString(36).toUpperCase();
@@ -132,6 +133,10 @@ function initConfetti() {
 }
 
 function init() {
+  // Initialize Google Analytics & track order success pageview
+  initAnalytics();
+  trackPageView('/shop/order-success', document.title);
+
   const app = document.getElementById('app');
   app.appendChild(createNavbar('shop'));
   app.appendChild(createMobileMenu());

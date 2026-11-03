@@ -11,6 +11,7 @@ import {
   createNavbar, createMobileMenu, createFooter,
   initNavbar, updateCartBadge, openGetStartedModal
 } from './layout.js';
+import { initAnalytics, trackPageView, trackBeginCheckout } from './analytics.js';
 
 // Delivery fee logic
 const DELIVERY_OPTIONS = [
@@ -118,7 +119,7 @@ function renderCart() {
           <strong>${formatPrice(total)}</strong>
         </div>
 
-        <a href="/shop/checkout" class="btn-primary" style="display:block;text-align:center;margin-top:1.5rem">
+        <a href="/shop/checkout" id="btn-proceed-checkout" class="btn-primary" style="display:block;text-align:center;margin-top:1.5rem">
           Proceed to Checkout
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
         </a>
@@ -129,6 +130,11 @@ function renderCart() {
       </aside>
     </div>
   `;
+
+  // Track begin checkout on button click
+  document.getElementById('btn-proceed-checkout')?.addEventListener('click', () => {
+    trackBeginCheckout(items, total);
+  });
 
   // Qty controls
   wrapper.querySelectorAll('.qty-btn').forEach(btn => {
@@ -197,6 +203,10 @@ function createCartPageSection() {
 
 // ─── INIT ─────────────────────────────────────────────────────────────────────
 function init() {
+  // Initialize Google Analytics & track cart pageview
+  initAnalytics();
+  trackPageView('/shop/cart', document.title);
+
   const app = document.getElementById('app');
   app.appendChild(createNavbar('shop'));
   app.appendChild(createMobileMenu());

@@ -1,0 +1,20 @@
+# Robots.txt for Justice Georgenes Solar Consults
+# https://justicesolar.vercel.app
+
+User-agent: *
+Allow: /
+Allow: /services
+Allow: /projects
+Allow: /shop
+Allow: /shop/product
+
+# Disallow cart and checkout flows to preserve user privacy and prevent indexing empty carts
+Disallow: /shop/cart
+Disallow: /shop/cart.html
+Disallow: /shop/checkout
+Disallow: /shop/checkout.html
+Disallow: /shop/order-success
+Disallow: /shop/order-success.html
+
+# Sitemap location
+Sitemap: https://justicesolar.vercel.app/sitemap.xml

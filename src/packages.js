@@ -188,13 +188,18 @@ export function createSolarPackages() {
   return section;
 }
 
+import { trackPackageSelect } from './analytics.js';
+
 export function initSolarPackages(openModalCallback) {
   // ─── Request a Quote Modal Bindings ─────────────────────────────────────────
   const quoteButtons = document.querySelectorAll('.package-card__btn');
   quoteButtons.forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
-      const packageName = btn.getAttribute('data-package-name');
+      const packageName = btn.getAttribute('data-package-name') || '';
+      
+      // Track solar package selection in Google Analytics
+      trackPackageSelect(packageName);
       
       if (typeof openModalCallback === 'function') {
         openModalCallback(packageName);

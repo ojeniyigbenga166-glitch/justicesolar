@@ -10,6 +10,7 @@ import {
   createCartDrawer, openCartDrawer,
   initNavbar, updateCartBadge
 } from './layout.js';
+import { initAnalytics, trackPageView, trackAddToCart } from './analytics.js';
 
 // ─── CART DRAWER ─────────────────────────────────────────────────────────────
 function renderCartDrawer() {
@@ -295,9 +296,46 @@ async function init() {
     return;
   }
 
-  // Update page title & meta
-  document.title = `${product.name} | Justice Georgenes Solar`;
-  document.querySelector('meta[name="description"]').content = product.shortDescription;
+  // Update page title & meta for SEO
+  document.title = `${product.name} | Buy Online | Justice Georgenes Solar Consults`;
+  const metaDesc = document.querySelector('meta[name="description"]');
+  if (metaDesc) {
+    metaDesc.content = product.shortDescription || `Buy ${product.name} authentic solar hardware with warranty at Justice Georgenes. Delivery across Nigeria.`;
+  }
+
+  // Inject dynamic Product Schema.org JSON-LD for Google rich snippets
+  const existingProductSchema = document.getElementById('product-jsonld');
+  if (existingProductSchema) existingProductSchema.remove();
+  const productSchemaScript = document.createElement('script');
+  productSchemaScript.id = 'product-jsonld';
+  productSchemaScript.type = 'application/ld+json';
+  productSchemaScript.textContent = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: product.name,
+    image: product.image?.startsWith('http') ? product.image : `https://justicesolar.vercel.app${product.image}`,
+    description: product.shortDescription || product.name,
+    brand: {
+      '@type': 'Brand',
+      name: product.brand || 'Justice Georgenes'
+    },
+    offers: {
+      '@type': 'Offer',
+      price: product.price,
+      priceCurrency: 'NGN',
+      availability: product.stock > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+      url: window.location.href,
+      seller: {
+        '@type': 'Organization',
+        name: 'Justice Georgenes Solar Consults'
+      }
+    }
+  });
+  document.head.appendChild(productSchemaScript);
+
+  // Initialize Google Analytics & track product detail pageview
+  initAnalytics();
+  trackPageView(window.location.pathname + window.location.search, document.title);
 
   const productPage = buildProductPage(product);
   app.appendChild(productPage);
@@ -318,9 +356,10 @@ async function init() {
   renderRelated(product);
 
   // Add to cart
-  document.getElementById('product-add-btn')?.addEventListener('click', btn => {
+  document.getElementById('product-add-btn')?.addEventListener('click', () => {
     const qty = parseInt(document.getElementById('qty-input')?.value || '1');
     addToCart(product, qty);
+    trackAddToCart({ ...product, quantity: qty });
     updateCartBadge(getCartCount());
     renderCartDrawer();
     openCartDrawer();
@@ -341,6 +380,7 @@ async function init() {
     if (product.stock === 0) { e.preventDefault(); return; }
     const qty = parseInt(document.getElementById('qty-input')?.value || '1');
     addToCart(product, qty);
+    trackAddToCart({ ...product, quantity: qty });
   });
 
   // Cart events

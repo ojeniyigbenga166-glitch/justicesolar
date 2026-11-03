@@ -13,6 +13,7 @@ import {
   createCartDrawer, openCartDrawer, closeCartDrawer,
   initNavbar, updateCartBadge
 } from './layout.js';
+import { initAnalytics, trackPageView, trackAddToCart } from './analytics.js';
 
 // ─── CART DRAWER RENDERER ────────────────────────────────────────────────────
 function renderCartDrawer() {
@@ -270,6 +271,7 @@ function handleAddToCart(btn) {
   if (!product) return;
 
   addToCart(product, 1);
+  trackAddToCart(product);
   updateCartBadge(getCartCount());
   renderCartDrawer();
   openCartDrawer();
@@ -329,6 +331,10 @@ function buildFilterButtons() {
 
 // ─── INIT ─────────────────────────────────────────────────────────────────────
 async function init() {
+  // Initialize Google Analytics & track shop pageview
+  initAnalytics();
+  trackPageView('/shop', document.title);
+
   const app = document.getElementById('app');
 
   app.appendChild(createNavbar('shop'));

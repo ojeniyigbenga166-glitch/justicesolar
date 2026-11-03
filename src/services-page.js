@@ -11,6 +11,7 @@ import {
   updateCartBadge
 } from './layout.js';
 import { getCartCount } from './cart.js';
+import { initAnalytics, trackPageView } from './analytics.js';
 
 // ==============================
 // Services Data (8 Services)
@@ -210,6 +211,9 @@ function switchService(index, updateURL = true) {
     const url = new URL(window.location.href);
     url.searchParams.set('service', service.slug);
     window.history.pushState({}, '', url);
+
+    // Track tab switch as virtual page view
+    trackPageView(`/services?service=${service.slug}`, `${service.title} | Justice Georgenes`);
   }
 
   // Update active state in Desktop Sidebar buttons
@@ -232,6 +236,10 @@ function switchService(index, updateURL = true) {
 // App Init
 // ==============================
 function init() {
+  // Initialize Google Analytics & track services page
+  initAnalytics();
+  trackPageView('/services', document.title);
+
   const app = document.getElementById('app');
 
   // Build shared layout elements

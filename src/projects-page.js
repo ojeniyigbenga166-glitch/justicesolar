@@ -7,6 +7,7 @@ import {
 } from './layout.js';
 import { getCartCount } from './cart.js';
 import { createSolarPackages, initSolarPackages } from './packages.js';
+import { initAnalytics, trackPageView } from './analytics.js';
 
 // Shared Layout Navbar/Mobile Menu imported from layout.js
 
@@ -392,6 +393,10 @@ function createPortfolioPage(category) {
 // App Init
 // ==============================
 async function init() {
+  // Initialize Google Analytics & track projects pageview
+  initAnalytics();
+  trackPageView('/projects', document.title);
+
   const app = document.getElementById('app');
   if (!app) { console.error('[Init] #app element not found'); return; }
 
@@ -405,15 +410,6 @@ async function init() {
   } catch (err) {
     console.error('[Init] fetchProjects failed, using fallbacks:', err);
   }
-
-  // ===== DEBUG: Test direct Supabase query (REMOVE THIS BLOCK WHEN DONE) =====
-  const { data, error } = await supabase
-    .from('projects')
-    .select('*');
-
-  console.log('PROJECTS:', data);
-  console.log('ERROR:', error);
-  // ===== END DEBUG BLOCK =====
 
   const projects = createProjects();
   const solarPackages = createSolarPackages();
@@ -440,6 +436,9 @@ async function init() {
     // Remove all sections except navbar and mobile menu
     const mainContent = app.querySelectorAll('section, footer');
     mainContent.forEach(el => el.remove());
+
+    // Track category portfolio view
+    trackPageView(`/projects#${encodeURIComponent(category)}`, `${category} Projects | Justice Georgenes`);
 
     // Create and append portfolio page
     const portfolioPage = createPortfolioPage(category);

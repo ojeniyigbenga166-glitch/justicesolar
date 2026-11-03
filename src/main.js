@@ -2,6 +2,7 @@ import './style.css';
 import { supabase } from './supabase.js';
 import { products, fetchProducts } from './products.js';
 import { createSolarPackages, initSolarPackages } from './packages.js';
+import { initAnalytics, trackPageView, trackLead, trackPhoneCall, trackWhatsAppClick } from './analytics.js';
 
 // ==============================
 // NAVBAR Component
@@ -1343,6 +1344,9 @@ function createGetStartedModal() {
       } catch (err) {
         console.error('Failed to save lead to database:', err);
       }
+
+      // Track lead generation event in Google Analytics
+      trackLead('get_started_modal', { name, email, address });
       
       const subject = encodeURIComponent(`New Inquiry from ${name}`);
       const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nAddress: ${address}\n\nMessage:\n${message}`);
@@ -1385,6 +1389,10 @@ function closeGetStartedModal() {
 // App Init
 // ==============================
 function init() {
+  // Initialize Google Analytics & track initial pageview
+  initAnalytics();
+  trackPageView('/', document.title);
+
   const app = document.getElementById('app');
 
   const navbar = createNavbar();

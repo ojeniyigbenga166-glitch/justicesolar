@@ -5,6 +5,7 @@
 // =============================================
 import { getCartCount } from './cart.js';
 import { supabase } from './supabase.js';
+import { trackLead, trackPhoneCall, trackWhatsAppClick } from './analytics.js';
 
 // ─── NAVBAR ──────────────────────────────────────────────────────────────────
 export function createNavbar(activePage = '') {
@@ -299,6 +300,9 @@ export function createGetStartedModal() {
             source: 'Website Modal',
             status: 'new'
           }]);
+
+        // Track lead in Google Analytics
+        trackLead('shared_layout_modal', { name, email, address });
           
         // Show success state
         form.innerHTML = `

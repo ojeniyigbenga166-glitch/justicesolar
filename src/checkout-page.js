@@ -12,6 +12,7 @@ import {
   initNavbar, updateCartBadge
 } from './layout.js';
 import { supabase } from './supabase.js';
+import { initAnalytics, trackPageView, trackPurchase, trackWhatsAppClick } from './analytics.js';
 
 // Delivery options (kept in sync with cart-page)
 const DELIVERY_OPTIONS = [
@@ -344,6 +345,10 @@ async function handleSubmit(e) {
   const waNumber = '2347037971175'; // 07037971175 in international format
   const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(msg)}`;
 
+  // Track purchase & WhatsApp conversion in Google Analytics
+  trackPurchase(ref, total, items);
+  trackWhatsAppClick('checkout_order_whatsapp', ref);
+
   // Clear cart then redirect to success page
   clearCart();
   window.open(waUrl, '_blank');
@@ -352,6 +357,10 @@ async function handleSubmit(e) {
 
 // ─── INIT ─────────────────────────────────────────────────────────────────────
 function init() {
+  // Initialize Google Analytics & track checkout pageview
+  initAnalytics();
+  trackPageView('/shop/checkout', document.title);
+
   const app = document.getElementById('app');
   app.appendChild(createNavbar('shop'));
   app.appendChild(createMobileMenu());
